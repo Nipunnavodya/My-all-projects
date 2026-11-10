@@ -1,0 +1,563 @@
+openapi: 3.0.3
+info:
+  title: Enterprise Payment Gateway Engine API Specification
+  description: |
+    Comprehensive, high-throughput, fault-tolerant Payment Gateway Integration Blueprint.
+    Supports Multi-Currency FX Engine, Fraud Risk Scoring, Idempotent Operations, Async Webhook Callbacks, 
+    Partial Refunds, Escrow Management, and Automated Split Ledger Settlements.
+  termsOfService: https://api.gateway.enterprise.com/terms
+  contact:
+    name: Core Architecture & Payment Systems Team
+    email: api-payments@gateway.enterprise.com
+    url: https://developer.gateway.enterprise.com/support
+  license:
+    name: Proprietary Enterprise License v2.0
+    url: https://developer.gateway.enterprise.com/licenses/v2.0
+  version: 2.4.0-RELEASE
+
+servers:
+  - url: https://api.gateway.enterprise.com/v2
+    description: Global Production Gateway cluster (Anycast Distributed)
+  - url: https://sandbox-api.gateway.enterprise.com/v2
+    description: Isolated Merchant Sandbox Integration Environment
+  - url: https://staging-api.gateway.enterprise.com/v2
+    description: Internal QA & End-to-End Test Harness
+
+tags:
+  - name: Transactions & Checkout
+    description: Endpoints for processing card, wallet, and BNPL checkout authorization flows.
+  - name: Webhook Orchestration
+    description: Subscriptions and event notification dispatch configurations.
+  - name: Refunds & Adjustments
+    description: Lifecycle operations for ledger credits, partial/full chargebacks, and adjustments.
+  - name: Risk & Fraud Verification
+    description: Device fingerprinting, real-time risk scoring, and 3D Secure v2.2 challenge validation.
+  - name: Settlement & Split Ledger
+    description: Multi-party payout split rules, merchant escrow release, and automated reconciliation.
+
+security:
+  - OAuth2_Bearer:
+      - write:payments
+      - read:payments
+  - HMAC_Signature: []
+  - Mutual_TLS: []
+
+paths:
+  /api/v1/payments/checkout:
+    post:
+      tags:
+        - Transactions & Checkout
+      summary: Initiate an Idempotent Multi-Currency Payment Checkout Transaction
+      description: |
+        Processes payment authorization or immediate capture across multiple tender types.
+        Enforces Idempotency Keys to prevent double-charging during network drops and automatically 
+        evaluates transaction risk using real-time machine learning fraud models.
+      operationId: processCheckout
+      parameters:
+        - in: header
+          name: Idempotency-Key
+          required: true
+          description: Unique UUID v4 key to guarantee idempotent request handling across retries.
+          schema:
+            type: string
+            format: uuid
+            example: 9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d
+        - in: header
+          name: X-Signature-SHA256
+          required: true
+          description: HMAC SHA-256 signature calculated over request payload using API secret key.
+          schema:
+            type: string
+            example: 8f9b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b
+        - in: header
+          name: X-Device-Fingerprint
+          required: false
+          description: Base64-encoded client hardware & session fingerprint string for risk evaluation.
+          schema:
+            type: string
+            example: eyJicm93c2VyIjoiQ2hyb21lIiwib3MiOiJXaW5kb3dzIiwicmVzIjoiMTkyMHgxMDgwIn0=
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CheckoutPaymentRequest'
+            examples:
+              CreditCardStandard:
+                summary: Standard Credit Card Payment with 3DS Verification
+                value:
+                  merchant_id: "mch_prod_99812736"
+                  order_id: "ORD-2026-10892"
+                  amount: 4500.00
+                  currency: "LKR"
+                  capture_method: "AUTOMATIC"
+                  payment_method:
+                    type: "CREDIT_CARD"
+                    card:
+                      card_holder_name: "K. A. Perera"
+                      card_number: "4111111111111111"
+                      exp_month: 12
+                      exp_year: 2028
+                      cvc: "889"
+                      billing_address:
+                        street_1: "No. 45 Galle Road"
+                        street_2: "Suite 3B"
+                        city: "Colombo"
+                        state: "Western"
+                        postal_code: "00300"
+                        country_iso2: "LK"
+                  customer:
+                    customer_id: "cust_771829"
+                    first_name: "Kasun"
+                    last_name: "Perera"
+                    email: "kasun.perera@example.lk"
+                    phone: "+94771234567"
+                    ip_address: "203.115.26.11"
+                  risk_metadata:
+                    device_session_id: "sess_d389a12c4"
+                    user_agent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+                  split_payouts:
+                    - vendor_id: "vnd_9011"
+                      amount: 4000.00
+                      fee_payer: "MERCHANT"
+                    - vendor_id: "platform_fee"
+                      amount: 500.00
+                      fee_payer: "VENDOR"
+
+      responses:
+        '200':
+          description: Payment Processed / Authorized Successfully
+          headers:
+            X-Request-Id:
+              schema:
+                type: string
+                example: req_8891023a45c
+            Idempotency-Status:
+              schema:
+                type: string
+                example: PROCESSED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckoutPaymentSuccessResponse'
+
+        '400':
+          description: Bad Request - Validation Error or Invalid Payload Format
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                code: "INVALID_CARD_NUMBER"
+                message: "The provided card number failed Luhn checksum validation algorithm."
+                timestamp: "2026-10-23T09:14:00Z"
+                path: "/api/v1/payments/checkout"
+                details:
+                  - field: "payment_method.card.card_number"
+                    issue: "Luhn check failure"
+
+        '401':
+          description: Unauthorized - Invalid API Tokens or Signature Mismatch
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+        '422':
+          description: Unprocessable Entity - Fraud Risk Score Exceeded Threshold
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RiskAssessmentErrorResponse'
+
+        '502':
+          description: Bad Gateway - Downstream Provider Authorization Failure
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /api/v1/payments/verify:
+    post:
+      tags:
+        - Transactions & Checkout
+      summary: Confirm 3DS Challenge or Webhook Status Verification
+      description: Validates 3D Secure v2.2 OTP challenge completion token or verifies transaction status from bank gateway.
+      operationId: verifyPayment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - transaction_id
+                - three_ds_auth_token
+              properties:
+                transaction_id:
+                  type: string
+                  example: "txn_887711229011"
+                three_ds_auth_token:
+                  type: string
+                  example: "3ds_tok_9918237198273"
+      responses:
+        '200':
+          description: Verification Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckoutPaymentSuccessResponse'
+
+  /api/v1/payments/{transaction_id}/refund:
+    post:
+      tags:
+        - Refunds & Adjustments
+      summary: Process Full or Partial Refund Against Existing Transaction
+      description: Initiates ledger adjustments and reverses funds back to origin customer payment method.
+      operationId: refundPayment
+      parameters:
+        - in: path
+          name: transaction_id
+          required: true
+          schema:
+            type: string
+            example: "txn_887711229011"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - amount
+                - reason
+              properties:
+                amount:
+                  type: number
+                  example: 1500.00
+                reason:
+                  type: string
+                  enum: [DUPLICATE, FRAUDULENT, REQUESTED_BY_CUSTOMER, RETURN]
+                  example: "REQUESTED_BY_CUSTOMER"
+                notes:
+                  type: string
+                  example: "Partial return of item #3"
+      responses:
+        '200':
+          description: Refund Authorized and Enqueued
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RefundSuccessResponse'
+
+  /api/v1/webhooks/subscribe:
+    post:
+      tags:
+        - Webhook Orchestration
+      summary: Register Webhook Subscription Endpoint
+      description: Registers endpoint URL to receive HTTP POST payloads when transaction events trigger.
+      operationId: registerWebhook
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - url
+                - subscribed_events
+              properties:
+                url:
+                  type: string
+                  format: uri
+                  example: "https://merchant.example.com/api/v1/webhooks/stripe"
+                subscribed_events:
+                  type: array
+                  items:
+                    type: string
+                    enum:
+                      - payment.succeeded
+                      - payment.failed
+                      - refund.processed
+                      - dispute.created
+                  example: ["payment.succeeded", "payment.failed"]
+      responses:
+        '201':
+          description: Webhook Registered
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  webhook_id:
+                    type: string
+                    example: "wh_991029102"
+                  secret_key:
+                    type: string
+                    example: "whsec_882910391203910"
+
+components:
+  securitySchemes:
+    OAuth2_Bearer:
+      type: oauth2
+      description: OAuth 2.0 Bearer Token with Granular Scopes
+      flows:
+        clientCredentials:
+          tokenUrl: https://auth.gateway.enterprise.com/oauth/v2/token
+          scopes:
+            write:payments: Authorization to execute payment processing requests
+            read:payments: Read-only access to transaction histories and ledger records
+            write:refunds: Authority to trigger financial reversals and customer refunds
+
+    HMAC_Signature:
+      type: apiKey
+      in: header
+      name: X-Signature-SHA256
+      description: SHA256 HMAC payload authenticity validation signature
+
+    Mutual_TLS:
+      type: apiKey
+      in: header
+      name: X-Client-Cert
+      description: mTLS TLS client certificate for enterprise bank partners
+
+  schemas:
+    CheckoutPaymentRequest:
+      type: object
+      required:
+        - merchant_id
+        - order_id
+        - amount
+        - currency
+        - capture_method
+        - payment_method
+        - customer
+      properties:
+        merchant_id:
+          type: string
+          example: "mch_prod_99812736"
+        order_id:
+          type: string
+          example: "ORD-2026-10892"
+        amount:
+          type: number
+          format: double
+          minimum: 0.01
+          example: 4500.00
+        currency:
+          type: string
+          pattern: '^[A-Z]{3}$'
+          example: "LKR"
+        capture_method:
+          type: string
+          enum: [AUTOMATIC, MANUAL_HOLD]
+          example: "AUTOMATIC"
+        payment_method:
+          type: object
+          required:
+            - type
+          properties:
+            type:
+              type: string
+              enum: [CREDIT_CARD, DEBIT_CARD, DIGITAL_WALLET, BNPL]
+              example: "CREDIT_CARD"
+            card:
+              type: object
+              properties:
+                card_holder_name:
+                  type: string
+                  example: "K. A. Perera"
+                card_number:
+                  type: string
+                  pattern: '^[0-9]{13,19}$'
+                  example: "4111111111111111"
+                exp_month:
+                  type: integer
+                  minimum: 1
+                  maximum: 12
+                  example: 12
+                exp_year:
+                  type: integer
+                  minimum: 2026
+                  maximum: 2050
+                  example: 2028
+                cvc:
+                  type: string
+                  pattern: '^[0-9]{3,4}$'
+                  example: "889"
+                billing_address:
+                  $ref: '#/components/schemas/Address'
+        customer:
+          $ref: '#/components/schemas/CustomerDetails'
+        risk_metadata:
+          type: object
+          properties:
+            device_session_id:
+              type: string
+              example: "sess_d389a12c4"
+            user_agent:
+              type: string
+              example: "Mozilla/5.0"
+        split_payouts:
+          type: array
+          items:
+            $ref: '#/components/schemas/SplitPayoutRule'
+
+    CheckoutPaymentSuccessResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [SUCCESS, REQUIRES_ACTION, PENDING_SETTLEMENT]
+          example: "SUCCESS"
+        transaction_id:
+          type: string
+          example: "txn_887711229011"
+        authorization_code:
+          type: string
+          example: "AUTH_889210"
+        paid_amount:
+          type: number
+          example: 4500.00
+        currency:
+          type: string
+          example: "LKR"
+        fx_exchange_rate:
+          type: number
+          example: 1.0000
+        risk_evaluation:
+          type: object
+          properties:
+            score:
+              type: integer
+              example: 12
+            recommendation:
+              type: string
+              example: "APPROVE"
+        timestamp:
+          type: string
+          format: date-time
+          example: "2026-10-23T09:14:00Z"
+
+    RefundSuccessResponse:
+      type: object
+      properties:
+        refund_id:
+          type: string
+          example: "ref_0019283102"
+        transaction_id:
+          type: string
+          example: "txn_887711229011"
+        refunded_amount:
+          type: number
+          example: 1500.00
+        status:
+          type: string
+          example: "PROCESSED"
+        processed_at:
+          type: string
+          format: date-time
+          example: "2026-10-23T09:14:00Z"
+
+    CustomerDetails:
+      type: object
+      required:
+        - email
+      properties:
+        customer_id:
+          type: string
+          example: "cust_771829"
+        first_name:
+          type: string
+          example: "Kasun"
+        last_name:
+          type: string
+          example: "Perera"
+        email:
+          type: string
+          format: email
+          example: "kasun.perera@example.lk"
+        phone:
+          type: string
+          example: "+94771234567"
+        ip_address:
+          type: string
+          format: ipv4
+          example: "203.115.26.11"
+
+    Address:
+      type: object
+      properties:
+        street_1:
+          type: string
+          example: "No. 45 Galle Road"
+        street_2:
+          type: string
+          example: "Suite 3B"
+        city:
+          type: string
+          example: "Colombo"
+        state:
+          type: string
+          example: "Western"
+        postal_code:
+          type: string
+          example: "00300"
+        country_iso2:
+          type: string
+          example: "LK"
+
+    SplitPayoutRule:
+      type: object
+      required:
+        - vendor_id
+        - amount
+      properties:
+        vendor_id:
+          type: string
+          example: "vnd_9011"
+        amount:
+          type: number
+          example: 4000.00
+        fee_payer:
+          type: string
+          enum: [MERCHANT, VENDOR, SHARED]
+          example: "MERCHANT"
+
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: string
+          example: "INVALID_PAYLOAD"
+        message:
+          type: string
+          example: "Request payload fails schema validation."
+        timestamp:
+          type: string
+          format: date-time
+          example: "2026-10-23T09:14:00Z"
+        path:
+          type: string
+          example: "/api/v1/payments/checkout"
+        details:
+          type: array
+          items:
+            type: object
+
+    RiskAssessmentErrorResponse:
+      type: object
+      properties:
+        code:
+          type: string
+          example: "RISK_THRESHOLD_EXCEEDED"
+        message:
+          type: string
+          example: "Transaction declined due to high automated fraud risk score."
+        risk_score:
+          type: integer
+          example: 89
+        recommended_action:
+          type: string
+          example: "REJECT"

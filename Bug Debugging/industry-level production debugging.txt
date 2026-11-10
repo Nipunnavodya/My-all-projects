@@ -1,0 +1,21 @@
+industry-level production debugging workflow එකක් මුල සිට අගටම සාර්ථකව කර අවසන් කළා:
+
+1. Postman Side:
+ Automated assertions මගින් Production 500 Server Error සහ 404 Route Not Found errors සාර්ථකව trigger කර capture කරගත්තා.
+
+
+ Header එක හරහා dynamic Correlation/Trace ID එකක් inject කර console alerts ලබාගත්තා.
+
+
+
+
+2. ELK (Kibana) Side:
+ Elastic Cloud instance එකකට production log stream dataset එක import කර index/data view එකක් සකස් කළා.
+
+
+ KQL (`http_status : 500`) මගින් API crashes පමණක් filter කර, histogram spikes සහ microservice stack traces (`billing-api-service`) විශ්ලේෂණය කර bug එක trace කළා.
+
+
+
+
+

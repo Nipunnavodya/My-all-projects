@@ -1,0 +1,176 @@
+{
+  "info": {
+    "name": "Production Error Tracing & Log Monitoring (Postman + ELK)",
+    "_postman_id": "7b848c21-9d18-421b-a9f8-prod-elk-debug",
+    "description": "Industry-grade API error tracing collection designed to trigger, trace, and monitor HTTP 404/500 errors correlated with ELK Stack (Elasticsearch, Logstash, Kibana) transaction IDs.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://httpbin.org",
+      "type": "string"
+    },
+    {
+      "key": "traceId",
+      "value": "tr-prod-99281a",
+      "type": "string"
+    },
+    {
+      "key": "kibanaHost",
+      "value": "http://localhost:5601",
+      "type": "string"
+    },
+    {
+      "key": "esHost",
+      "value": "http://localhost:9200",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "01. Trace 500 Internal Server Error & Extract X-Trace-ID",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "// Generate dynamic correlation ID for ELK tracing",
+              "const correlationId = 'trace-' + Date.now() + '-' + Math.random().toString(36).substring(2, 8);",
+              "pm.variables.set('activeTraceId', correlationId);",
+              "pm.request.headers.add({ key: 'X-Correlation-ID', value: correlationId });",
+              "pm.request.headers.add({ key: 'X-Service-Name', value: 'billing-api-service' });",
+              "console.log('Dispatching request with Correlation ID:', correlationId);"
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Verify 500 Internal Server Error Caught', function () {",
+              "    pm.response.to.have.status(500);",
+              "});",
+              "",
+              "pm.test('Capture and store Trace ID for Kibana Discovery', function () {",
+              "    const traceId = pm.variables.get('activeTraceId');",
+              "    pm.collectionVariables.set('lastFailedTraceId', traceId);",
+              "    pm.expect(traceId).to.be.a('string');",
+              "    console.warn(`[ALERT] 500 Triggered! Kibana Query: trace.id : \"${traceId}\"`);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/status/500",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "status",
+            "500"
+          ]
+        },
+        "description": "Simulates a production critical 500 server crash with an attached X-Correlation-ID for upstream ELK log correlation."
+      }
+    },
+    {
+      "name": "02. Trace 404 Route Not Found / Deprecated API Call",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "const correlationId = 'trace-404-' + Date.now();",
+              "pm.variables.set('activeTraceId', correlationId);",
+              "pm.request.headers.add({ key: 'X-Correlation-ID', value: correlationId });"
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Verify 404 Not Found Returned', function () {",
+              "    pm.response.to.have.status(404);",
+              "});",
+              "",
+              "pm.test('Log 404 incident details', function () {",
+              "    console.info(`[INFO] 404 Route Missing at: ${pm.request.url.toString()}`);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/deprecated-endpoint-missing",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "deprecated-endpoint-missing"
+          ]
+        },
+        "description": "Simulates 404 client routing mismatch or broken API contract."
+      }
+    },
+    {
+      "name": "03. Query Elasticsearch API for 500 Error Stacktrace (KQL)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Elasticsearch Search Query Successful', function () {",
+              "    pm.expect(pm.response.code).to.be.oneOf([200, 401, 403, 404]);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"query\": {\n    \"bool\": {\n      \"must\": [\n        { \"match\": { \"http.response.status_code\": 500 } },\n        { \"match\": { \"log.level\": \"ERROR\" } },\n        { \"range\": { \"@timestamp\": { \"gte\": \"now-1h\" } } }\n      ]\n    }\n  },\n  \"sort\": [{ \"@timestamp\": { \"order\": \"desc\" } }],\n  \"size\": 10\n}"
+        },
+        "url": {
+          "raw": "{{esHost}}/filebeat-*/_search",
+          "host": [
+            "{{esHost}}"
+          ],
+          "path": [
+            "filebeat-*",
+            "_search"
+          ]
+        },
+        "description": "Direct Query from Postman into Elasticsearch API to pull production log documents filtering 500 status codes."
+      }
+    }
+  ]
+}

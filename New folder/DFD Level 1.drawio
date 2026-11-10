@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/28.0.6 Chrome/138.0.7204.100 Electron/37.2.3 Safari/537.36" version="28.0.6">
+  <diagram name="Page-1" id="zNFDHf2HsNVgEncZTPkx">
+    <mxGraphModel dx="1406" dy="1664" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="ext_customer" value="Customer / Web &amp; Mobile Client" style="rectangle;whiteSpace=wrap;html=1;fillColor=#2C3036;strokeColor=#1E2125;fontColor=#FFFFFF;fontStyle=1;fontSize=13" parent="1" vertex="1">
+          <mxGeometry x="40" y="280" width="180" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="ext_admin" value="System Administrator / Management" style="rectangle;whiteSpace=wrap;html=1;fillColor=#2C3036;strokeColor=#1E2125;fontColor=#FFFFFF;fontStyle=1;fontSize=13" parent="1" vertex="1">
+          <mxGeometry x="40" y="680" width="180" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="ext_payment_gateway" value="External Payment Gateway&#xa;(Stripe / PayPal API)" style="rectangle;whiteSpace=wrap;html=1;fillColor=#2C3036;strokeColor=#1E2125;fontColor=#FFFFFF;fontStyle=1;fontSize=13" parent="1" vertex="1">
+          <mxGeometry x="1400" y="440" width="180" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="ext_logistics" value="Logistics &amp; Courier Provider API" style="rectangle;whiteSpace=wrap;html=1;fillColor=#2C3036;strokeColor=#1E2125;fontColor=#FFFFFF;fontStyle=1;fontSize=13" parent="1" vertex="1">
+          <mxGeometry x="1400" y="800" width="180" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="p1" value="1.0&#xa;User Authentication &amp;&#xa;Identity Management" style="ellipse;whiteSpace=wrap;html=1;fillColor=#714B67;strokeColor=#4A2E43;fontColor=#FFFFFF;fontStyle=1;fontSize=12" parent="1" vertex="1">
+          <mxGeometry x="320" y="120" width="160" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="p2" value="2.0&#xa;Product Catalog &amp;&#xa;Search Service" style="ellipse;whiteSpace=wrap;html=1;fillColor=#714B67;strokeColor=#4A2E43;fontColor=#FFFFFF;fontStyle=1;fontSize=12" parent="1" vertex="1">
+          <mxGeometry x="320" y="320" width="160" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="p3" value="3.0&#xa;Order Processing &amp;&#xa;Cart Management" style="ellipse;whiteSpace=wrap;html=1;fillColor=#714B67;strokeColor=#4A2E43;fontColor=#FFFFFF;fontStyle=1;fontSize=12" parent="1" vertex="1">
+          <mxGeometry x="320" y="520" width="160" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="p4" value="4.0&#xa;Payment Verification &amp;&#xa;Billing Handler" style="ellipse;whiteSpace=wrap;html=1;fillColor=#714B67;strokeColor=#4A2E43;fontColor=#FFFFFF;fontStyle=1;fontSize=12" parent="1" vertex="1">
+          <mxGeometry x="860" y="440" width="160" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="p5" value="5.0&#xa;Inventory &amp;&#xa;Stock Reservation" style="ellipse;whiteSpace=wrap;html=1;fillColor=#714B67;strokeColor=#4A2E43;fontColor=#FFFFFF;fontStyle=1;fontSize=12" parent="1" vertex="1">
+          <mxGeometry x="860" y="600" width="160" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="p6" value="6.0&#xa;Fulfillment &amp;&#xa;Shipping Orchestrator" style="ellipse;whiteSpace=wrap;html=1;fillColor=#714B67;strokeColor=#4A2E43;fontColor=#FFFFFF;fontStyle=1;fontSize=12" parent="1" vertex="1">
+          <mxGeometry x="860" y="780" width="160" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="p7" value="7.0&#xa;Notification &amp;&#xa;Messaging Service" style="ellipse;whiteSpace=wrap;html=1;fillColor=#714B67;strokeColor=#4A2E43;fontColor=#FFFFFF;fontStyle=1;fontSize=12" parent="1" vertex="1">
+          <mxGeometry x="860" y="240" width="160" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="p8" value="8.0&#xa;Analytics, Audit &amp;&#xa;Reporting Engine" style="ellipse;whiteSpace=wrap;html=1;fillColor=#714B67;strokeColor=#4A2E43;fontColor=#FFFFFF;fontStyle=1;fontSize=12" parent="1" vertex="1">
+          <mxGeometry x="320" y="780" width="160" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="ds_users" value="D1 | User Accounts &amp; Credentials DB" style="html=1;whiteSpace=wrap;shape=partialRectangle;right=0;left=0;fillColor=#E6F4F4;strokeColor=#00A09D;strokeWidth=2;fontColor=#2C3036;fontStyle=1;fontSize=12" parent="1" vertex="1">
+          <mxGeometry x="570" y="100" width="220" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="ds_catalog" value="D2 | Product Catalog Store" style="html=1;whiteSpace=wrap;shape=partialRectangle;right=0;left=0;fillColor=#E6F4F4;strokeColor=#00A09D;strokeWidth=2;fontColor=#2C3036;fontStyle=1;fontSize=12" parent="1" vertex="1">
+          <mxGeometry x="570" y="320" width="220" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="ds_orders" value="D3 | Active Orders &amp; Cart DB" style="html=1;whiteSpace=wrap;shape=partialRectangle;right=0;left=0;fillColor=#E6F4F4;strokeColor=#00A09D;strokeWidth=2;fontColor=#2C3036;fontStyle=1;fontSize=12" parent="1" vertex="1">
+          <mxGeometry x="590" y="500" width="220" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="ds_payments" value="D4 | Payment Ledger &amp; Transactions DB" style="html=1;whiteSpace=wrap;shape=partialRectangle;right=0;left=0;fillColor=#E6F4F4;strokeColor=#00A09D;strokeWidth=2;fontColor=#2C3036;fontStyle=1;fontSize=12" parent="1" vertex="1">
+          <mxGeometry x="1110" y="440" width="220" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="ds_inventory" value="D5 | Inventory &amp; Warehouse DB" style="html=1;whiteSpace=wrap;shape=partialRectangle;right=0;left=0;fillColor=#E6F4F4;strokeColor=#00A09D;strokeWidth=2;fontColor=#2C3036;fontStyle=1;fontSize=12" parent="1" vertex="1">
+          <mxGeometry x="1110" y="600" width="220" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="ds_shipments" value="D6 | Shipment Tracking Records" style="html=1;whiteSpace=wrap;shape=partialRectangle;right=0;left=0;fillColor=#E6F4F4;strokeColor=#00A09D;strokeWidth=2;fontColor=#2C3036;fontStyle=1;fontSize=12" parent="1" vertex="1">
+          <mxGeometry x="1110" y="800" width="220" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="ds_notifications" value="D7 | Notification Queue &amp; Logs" style="html=1;whiteSpace=wrap;shape=partialRectangle;right=0;left=0;fillColor=#E6F4F4;strokeColor=#00A09D;strokeWidth=2;fontColor=#2C3036;fontStyle=1;fontSize=12" parent="1" vertex="1">
+          <mxGeometry x="1110" y="240" width="220" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="ds_analytics" value="D8 | System Audit &amp; Analytics Data Warehouse" style="html=1;whiteSpace=wrap;shape=partialRectangle;right=0;left=0;fillColor=#E6F4F4;strokeColor=#00A09D;strokeWidth=2;fontColor=#2C3036;fontStyle=1;fontSize=12" parent="1" vertex="1">
+          <mxGeometry x="570" y="810" width="220" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f_auth_req" value="Login / Token Request" style="strokeColor=#714B67;strokeWidth=2;fontColor=#2C3036;fontStyle=1;fontSize=10" parent="1" source="ext_customer" target="p1" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f_auth_db_w" value="Write Credentials" style="strokeColor=#00A09D;strokeWidth=2;fontColor=#2C3036;fontStyle=1;fontSize=10" parent="1" source="p1" target="ds_users" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f_auth_db_r" value="Validate Token / Roles" style="strokeColor=#00A09D;strokeWidth=2;fontColor=#2C3036;fontStyle=1;fontSize=10;dashed=1" parent="1" source="ds_users" target="p1" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f_cat_search" value="Search Products" style="strokeColor=#714B67;strokeWidth=2;fontColor=#2C3036;fontStyle=1;fontSize=10" parent="1" source="ext_customer" target="p2" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f_cat_read" value="Fetch Item Details" style="strokeColor=#00A09D;strokeWidth=2;fontColor=#2C3036;fontStyle=1;fontSize=10" parent="1" source="ds_catalog" target="p2" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f_cat_admin" value="Update Inventory / Price" style="strokeColor=#2C3036;strokeWidth=2;fontColor=#2C3036;fontStyle=1;fontSize=10" parent="1" source="ext_admin" target="p2" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f_order_create" value="Submit Cart / Place Order" style="strokeColor=#714B67;strokeWidth=2;fontColor=#2C3036;fontStyle=1;fontSize=10" parent="1" source="ext_customer" target="p3" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f_order_save" value="Save Pending Order" style="strokeColor=#00A09D;strokeWidth=2;fontColor=#2C3036;fontStyle=1;fontSize=10" parent="1" source="p3" target="ds_orders" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f_order_to_pay" value="Trigger Payment (Order Payload)" style="strokeColor=#714B67;strokeWidth=2;fontColor=#2C3036;fontStyle=1;fontSize=10" parent="1" source="p3" target="p4" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="640" y="490" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f_pay_ext" value="Process Charge API" style="strokeColor=#2C3036;strokeWidth=2;fontColor=#2C3036;fontStyle=1;fontSize=10" parent="1" source="p4" target="ext_payment_gateway" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f_pay_res" value="Webhook Callback / Status" style="strokeColor=#2C3036;strokeWidth=2;fontColor=#2C3036;fontStyle=1;fontSize=10;dashed=1" parent="1" source="ext_payment_gateway" target="p4" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f_pay_ledger" value="Record Transaction" style="strokeColor=#00A09D;strokeWidth=2;fontColor=#2C3036;fontStyle=1;fontSize=10" parent="1" source="p4" target="ds_payments" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f_pay_to_inv" value="Reserve Stock Request" style="strokeColor=#714B67;strokeWidth=2;fontColor=#2C3036;fontStyle=1;fontSize=10" parent="1" source="p4" target="p5" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f_inv_deduct" value="Deduct Stock Count" style="strokeColor=#00A09D;strokeWidth=2;fontColor=#2C3036;fontStyle=1;fontSize=10" parent="1" source="p5" target="ds_inventory" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f_inv_to_ship" value="Dispatch Order Event" style="strokeColor=#714B67;strokeWidth=2;fontColor=#2C3036;fontStyle=1;fontSize=10" parent="1" source="p5" target="p6" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f_ship_ext" value="Create Waybill / Booking" style="strokeColor=#2C3036;strokeWidth=2;fontColor=#2C3036;fontStyle=1;fontSize=10" parent="1" source="p6" target="ext_logistics" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f_ship_rec" value="Save Tracking Details" style="strokeColor=#00A09D;strokeWidth=2;fontColor=#2C3036;fontStyle=1;fontSize=10" parent="1" source="p6" target="ds_shipments" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f_notify_trigger" value="Send Email/SMS Payload" style="strokeColor=#714B67;strokeWidth=2;fontColor=#2C3036;fontStyle=1;fontSize=10" parent="1" source="p4" target="p7" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f_notify_write" value="Log Dispatch Status" style="strokeColor=#00A09D;strokeWidth=2;fontColor=#2C3036;fontStyle=1;fontSize=10" parent="1" source="p7" target="ds_notifications" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f_notify_cust" value="Push Notification / Email" style="strokeColor=#714B67;strokeWidth=2;fontColor=#2C3036;fontStyle=1;fontSize=10;dashed=1" parent="1" source="p7" target="ext_customer" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f_audit_log" value="Capture System Metrics &amp; Audit Logs" style="strokeColor=#714B67;strokeWidth=2;fontColor=#2C3036;fontStyle=1;fontSize=10" parent="1" source="p3" target="p8" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f_analytics_write" value="Batch Store Aggregated Data" style="strokeColor=#00A09D;strokeWidth=2;fontColor=#2C3036;fontStyle=1;fontSize=10" parent="1" source="p8" target="ds_analytics" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f_admin_report" value="View BI Reports &amp; Audit Logs" style="strokeColor=#2C3036;strokeWidth=2;fontColor=#2C3036;fontStyle=1;fontSize=10;dashed=1" parent="1" source="p8" target="ext_admin" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

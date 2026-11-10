@@ -1,0 +1,1626 @@
+Task Name,Description,Status,Priority,Task Type,Story Points,Assignee
+EPIC-01: Identity & Access Management Infrastructure,"Enterprise IAM solution with OAuth2, OIDC, Multi-Factor Authentication (MFA), and RBAC.",In Progress,Urgent,Epic,,Unassigned
+US-001: Implement OAuth2.0 / OIDC Social Login Integration,"As a user, I want to log in using Google, Apple, and GitHub SSO so that registration is frictionless.
+
+Acceptance Criteria:
+1. Support Google, Apple, and GitHub OAuth 2.0 endpoints.
+2. Auto-map user profile metadata (email, full name, avatar).
+3. Handle OAuth failure gracefully with readable UI error messages.",Done,High,User Story,5,Unassigned
+US-002: Multi-Factor Authentication (MFA) via TOTP / Authenticator App,"As a security-conscious user, I want to enable MFA via Google Authenticator or Authy so that my account is protected against unauthorized access.
+
+Acceptance Criteria:
+1. Generate QR Code containing base32 secret.
+2. Provide 10 single-use backup recovery codes.
+3. Enforce 6-digit TOTP validation during login upon activation.",In Progress,Urgent,User Story,8,Unassigned
+US-003: JWT Token Refresh & Revocation Architecture,"As a backend system, I need access and refresh token mechanisms with redis token blacklisting so that sessions are secure.
+
+Acceptance Criteria:
+1. Access tokens expire in 15 minutes.
+2. Refresh token rotation implemented on every refresh call.
+3. Invalidate active tokens upon logout or password change via Redis blacklist.",Done,Urgent,User Story,8,Unassigned
+US-004: Role-Based Access Control (RBAC) Permission Matrix,"As an admin, I want granular permissions (Super Admin, Manager, Support Agent, Customer) so that access is restricted according to least privilege principle.",Done,High,User Story,5,Unassigned
+US-005: Passwordless Magic Link Login Workflow,"As a returning user, I want to receive a magic link via email to log in without entering a password.
+
+Acceptance Criteria:
+1. Link expires in 10 minutes.
+2. One-time use cryptographic hash verification.
+3. Rate limit request to 3 attempts per hour per IP.",To Do,Normal,User Story,5,Unassigned
+EPIC-AUTH: User Authentication & IAM Architecture,"End-to-end design, implementation, testing, and deployment of the User Authentication & IAM module.",In Progress,High,Epic,,Unassigned
+US-006: Implement Redis Caching Layer for User Authentication & IAM API Endpoints,"As a product developer, I need to implement: Architect high-throughput caching strategy using Redis cluster to achieve <50ms P99 latency.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Progress,Normal,User Story,5,Unassigned
+US-007: Database Schema Migration & Index Optimization for User Authentication & IAM,"As a product developer, I need to implement: Design PostgreSQL relational schema with partitioned tables, B-tree/GIN indexes, and foreign key constraints.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",QA Testing,Urgent,User Story,8,Unassigned
+BUG-001: Memory Leak in WebSocket Connection Pool during User Authentication & IAM sync,"Environment: Staging / Production
+
+Issue Description: Unreleased event listeners lead to steady node.js heap memory escalation under load.
+
+Steps to Reproduce:
+1. Trigger concurrent requests.
+2. Observe server response headers and DB logs.
+
+Expected Result: System gracefully handles concurrency without state corruption.",To Do,High,Bug,2,Unassigned
+US-008: RESTful & GraphQL API Design for User Authentication & IAM,"As a product developer, I need to implement: Expose secure REST endpoints with OpenAPI 3.0 specification and GraphQL queries for mobile clients.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",To Do,Normal,User Story,5,Unassigned
+US-009: Unit & Integration Test Coverage (>85%) for User Authentication & IAM,"As a product developer, I need to implement: Write Jest / PyTest test cases ensuring critical business logic path coverage exceeds 85%.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Review,Urgent,User Story,3,Unassigned
+US-010: Input Validation & Sanitization Framework for User Authentication & IAM,"As a product developer, I need to implement: Implement middleware sanitization against SQL Injection, XSS, and payload manipulation.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",Done,Normal,User Story,3,Unassigned
+US-011: Asynchronous Event Publishing to Apache Kafka for User Authentication & IAM,"As a product developer, I need to implement: Publish transactional domain events to Kafka topic for distributed microservices processing.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Progress,Urgent,User Story,8,Unassigned
+BUG-002: SQL Query Timeout on large dataset pagination in User Authentication & IAM,"Environment: Staging / Production
+
+Issue Description: Missing index on soft-deleted rows causes full table scan on 5M+ row table.
+
+Steps to Reproduce:
+1. Trigger concurrent requests.
+2. Observe server response headers and DB logs.
+
+Expected Result: System gracefully handles concurrency without state corruption.",In Progress,High,Bug,2,Unassigned
+US-012: Rate Limiting & DDoS Protection Middleware for User Authentication & IAM,"As a product developer, I need to implement: Enforce token bucket algorithm via Redis to prevent API scraping and brute force attacks.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",QA Testing,Normal,User Story,5,Unassigned
+US-013: UI/UX Component Development in Next.js / Tailwind for User Authentication & IAM,"As a product developer, I need to implement: Build accessible, responsive React components matching Figma Design System tokens.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",To Do,Urgent,User Story,5,Unassigned
+US-014: Automated End-to-End E2E Test Suite (Playwright) for User Authentication & IAM,"As a product developer, I need to implement: Script cross-browser end-to-end user journeys in Playwright with CI execution.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Review,Normal,User Story,5,Unassigned
+US-015: Postman API Test Collection & Newman Integration for User Authentication & IAM,"As a product developer, I need to implement: Create parameterized Postman API collection with pre-request scripts and assertions.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",Done,Urgent,User Story,3,Unassigned
+BUG-003: XSS Vulnerability in un-sanitized user comment field in User Authentication & IAM,"Environment: Staging / Production
+
+Issue Description: Script tags executed when rendering rich text user feedback in admin portal.
+
+Steps to Reproduce:
+1. Trigger concurrent requests.
+2. Observe server response headers and DB logs.
+
+Expected Result: System gracefully handles concurrency without state corruption.",To Do,Urgent,Bug,2,Unassigned
+US-016: Audit Logging & Compliance Event Tracker for User Authentication & IAM,"As a product developer, I need to implement: Capture immutable audit logs for administrative actions and security sensitive state changes.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Progress,Normal,User Story,5,Unassigned
+US-017: Localization & Multi-Language Support (i18n) for User Authentication & IAM,"As a product developer, I need to implement: Implement client and server-side internationalization support for English, Sinhala, and Tamil.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",QA Testing,Urgent,User Story,3,Unassigned
+EPIC-PROD: Product Catalog & Search Engine Architecture,"End-to-end design, implementation, testing, and deployment of the Product Catalog & Search Engine module.",In Progress,High,Epic,,Unassigned
+US-018: Implement Redis Caching Layer for Product Catalog & Search Engine API Endpoints,"As a product developer, I need to implement: Architect high-throughput caching strategy using Redis cluster to achieve <50ms P99 latency.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",QA Testing,Normal,User Story,5,Unassigned
+US-019: Database Schema Migration & Index Optimization for Product Catalog & Search Engine,"As a product developer, I need to implement: Design PostgreSQL relational schema with partitioned tables, B-tree/GIN indexes, and foreign key constraints.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",To Do,Urgent,User Story,8,Unassigned
+BUG-004: Token Expiration Mismatch between Auth Service and Gateway in Product Catalog & Search Engine,"Environment: Staging / Production
+
+Issue Description: Gateway accepts expired JWT tokens due to clock skew between server instances.
+
+Steps to Reproduce:
+1. Trigger concurrent requests.
+2. Observe server response headers and DB logs.
+
+Expected Result: System gracefully handles concurrency without state corruption.",In Progress,High,Bug,2,Unassigned
+US-020: RESTful & GraphQL API Design for Product Catalog & Search Engine,"As a product developer, I need to implement: Expose secure REST endpoints with OpenAPI 3.0 specification and GraphQL queries for mobile clients.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Review,Normal,User Story,5,Unassigned
+US-021: Unit & Integration Test Coverage (>85%) for Product Catalog & Search Engine,"As a product developer, I need to implement: Write Jest / PyTest test cases ensuring critical business logic path coverage exceeds 85%.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",Done,Urgent,User Story,3,Unassigned
+US-022: Input Validation & Sanitization Framework for Product Catalog & Search Engine,"As a product developer, I need to implement: Implement middleware sanitization against SQL Injection, XSS, and payload manipulation.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Progress,Normal,User Story,3,Unassigned
+US-023: Asynchronous Event Publishing to Apache Kafka for Product Catalog & Search Engine,"As a product developer, I need to implement: Publish transactional domain events to Kafka topic for distributed microservices processing.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",QA Testing,Urgent,User Story,8,Unassigned
+BUG-005: State Sync Failure on React Native Client during offline mode in Product Catalog & Search Engine,"Environment: Staging / Production
+
+Issue Description: Local SQLite database fails to reconcile with remote API upon network restoration.
+
+Steps to Reproduce:
+1. Trigger concurrent requests.
+2. Observe server response headers and DB logs.
+
+Expected Result: System gracefully handles concurrency without state corruption.",To Do,Normal,Bug,2,Unassigned
+US-024: Rate Limiting & DDoS Protection Middleware for Product Catalog & Search Engine,"As a product developer, I need to implement: Enforce token bucket algorithm via Redis to prevent API scraping and brute force attacks.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",To Do,Normal,User Story,5,Unassigned
+US-025: UI/UX Component Development in Next.js / Tailwind for Product Catalog & Search Engine,"As a product developer, I need to implement: Build accessible, responsive React components matching Figma Design System tokens.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Review,Urgent,User Story,5,Unassigned
+US-026: Automated End-to-End E2E Test Suite (Playwright) for Product Catalog & Search Engine,"As a product developer, I need to implement: Script cross-browser end-to-end user journeys in Playwright with CI execution.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",Done,Normal,User Story,5,Unassigned
+US-027: Postman API Test Collection & Newman Integration for Product Catalog & Search Engine,"As a product developer, I need to implement: Create parameterized Postman API collection with pre-request scripts and assertions.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Progress,Urgent,User Story,3,Unassigned
+BUG-006: Race Condition causing duplicate transactions in Product Catalog & Search Engine,"Environment: Staging / Production
+
+Issue Description: Double click on submit button sends parallel requests resulting in dual database commits.
+
+Steps to Reproduce:
+1. Trigger concurrent requests.
+2. Observe server response headers and DB logs.
+
+Expected Result: System gracefully handles concurrency without state corruption.",In Progress,Urgent,Bug,2,Unassigned
+US-028: Audit Logging & Compliance Event Tracker for Product Catalog & Search Engine,"As a product developer, I need to implement: Capture immutable audit logs for administrative actions and security sensitive state changes.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",QA Testing,Normal,User Story,5,Unassigned
+US-029: Localization & Multi-Language Support (i18n) for Product Catalog & Search Engine,"As a product developer, I need to implement: Implement client and server-side internationalization support for English, Sinhala, and Tamil.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",To Do,Urgent,User Story,3,Unassigned
+US-030: Performance Load Testing & Profiling (k6 / Locust) for Product Catalog & Search Engine,"As a product developer, I need to implement: Simulate peak concurrency load of 10,000 active users and profile memory/CPU usage.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Review,Normal,User Story,5,Unassigned
+US-031: Implement Redis Caching Layer for Product Catalog & Search Engine API Endpoints,"As a product developer, I need to implement: Architect high-throughput caching strategy using Redis cluster to achieve <50ms P99 latency.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",Done,Urgent,User Story,5,Unassigned
+BUG-007: Memory Leak in WebSocket Connection Pool during Product Catalog & Search Engine sync,"Environment: Staging / Production
+
+Issue Description: Unreleased event listeners lead to steady node.js heap memory escalation under load.
+
+Steps to Reproduce:
+1. Trigger concurrent requests.
+2. Observe server response headers and DB logs.
+
+Expected Result: System gracefully handles concurrency without state corruption.",To Do,High,Bug,2,Unassigned
+US-032: Database Schema Migration & Index Optimization for Product Catalog & Search Engine,"As a product developer, I need to implement: Design PostgreSQL relational schema with partitioned tables, B-tree/GIN indexes, and foreign key constraints.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Progress,Normal,User Story,8,Unassigned
+EPIC-CART: Shopping Cart & Pricing Engine Architecture,"End-to-end design, implementation, testing, and deployment of the Shopping Cart & Pricing Engine module.",In Progress,High,Epic,,Unassigned
+US-033: Implement Redis Caching Layer for Shopping Cart & Pricing Engine API Endpoints,"As a product developer, I need to implement: Architect high-throughput caching strategy using Redis cluster to achieve <50ms P99 latency.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",QA Testing,High,User Story,5,Unassigned
+US-034: Database Schema Migration & Index Optimization for Shopping Cart & Pricing Engine,"As a product developer, I need to implement: Design PostgreSQL relational schema with partitioned tables, B-tree/GIN indexes, and foreign key constraints.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",To Do,Low,User Story,8,Unassigned
+US-035: RESTful & GraphQL API Design for Shopping Cart & Pricing Engine,"As a product developer, I need to implement: Expose secure REST endpoints with OpenAPI 3.0 specification and GraphQL queries for mobile clients.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Review,High,User Story,5,Unassigned
+BUG-008: SQL Query Timeout on large dataset pagination in Shopping Cart & Pricing Engine,"Environment: Staging / Production
+
+Issue Description: Missing index on soft-deleted rows causes full table scan on 5M+ row table.
+
+Steps to Reproduce:
+1. Trigger concurrent requests.
+2. Observe server response headers and DB logs.
+
+Expected Result: System gracefully handles concurrency without state corruption.",In Progress,High,Bug,2,Unassigned
+US-036: Unit & Integration Test Coverage (>85%) for Shopping Cart & Pricing Engine,"As a product developer, I need to implement: Write Jest / PyTest test cases ensuring critical business logic path coverage exceeds 85%.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",Done,Low,User Story,3,Unassigned
+US-037: Input Validation & Sanitization Framework for Shopping Cart & Pricing Engine,"As a product developer, I need to implement: Implement middleware sanitization against SQL Injection, XSS, and payload manipulation.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Progress,High,User Story,3,Unassigned
+US-038: Asynchronous Event Publishing to Apache Kafka for Shopping Cart & Pricing Engine,"As a product developer, I need to implement: Publish transactional domain events to Kafka topic for distributed microservices processing.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",QA Testing,Low,User Story,8,Unassigned
+US-039: Rate Limiting & DDoS Protection Middleware for Shopping Cart & Pricing Engine,"As a product developer, I need to implement: Enforce token bucket algorithm via Redis to prevent API scraping and brute force attacks.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",To Do,High,User Story,5,Unassigned
+BUG-009: XSS Vulnerability in un-sanitized user comment field in Shopping Cart & Pricing Engine,"Environment: Staging / Production
+
+Issue Description: Script tags executed when rendering rich text user feedback in admin portal.
+
+Steps to Reproduce:
+1. Trigger concurrent requests.
+2. Observe server response headers and DB logs.
+
+Expected Result: System gracefully handles concurrency without state corruption.",To Do,Urgent,Bug,2,Unassigned
+US-040: UI/UX Component Development in Next.js / Tailwind for Shopping Cart & Pricing Engine,"As a product developer, I need to implement: Build accessible, responsive React components matching Figma Design System tokens.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Review,Low,User Story,5,Unassigned
+US-041: Automated End-to-End E2E Test Suite (Playwright) for Shopping Cart & Pricing Engine,"As a product developer, I need to implement: Script cross-browser end-to-end user journeys in Playwright with CI execution.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",Done,High,User Story,5,Unassigned
+US-042: Postman API Test Collection & Newman Integration for Shopping Cart & Pricing Engine,"As a product developer, I need to implement: Create parameterized Postman API collection with pre-request scripts and assertions.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Progress,Low,User Story,3,Unassigned
+US-043: Audit Logging & Compliance Event Tracker for Shopping Cart & Pricing Engine,"As a product developer, I need to implement: Capture immutable audit logs for administrative actions and security sensitive state changes.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",QA Testing,High,User Story,5,Unassigned
+BUG-010: Token Expiration Mismatch between Auth Service and Gateway in Shopping Cart & Pricing Engine,"Environment: Staging / Production
+
+Issue Description: Gateway accepts expired JWT tokens due to clock skew between server instances.
+
+Steps to Reproduce:
+1. Trigger concurrent requests.
+2. Observe server response headers and DB logs.
+
+Expected Result: System gracefully handles concurrency without state corruption.",In Progress,High,Bug,2,Unassigned
+US-044: Localization & Multi-Language Support (i18n) for Shopping Cart & Pricing Engine,"As a product developer, I need to implement: Implement client and server-side internationalization support for English, Sinhala, and Tamil.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",To Do,Low,User Story,3,Unassigned
+EPIC-PAY: FinTech Payment Gateway Integration Architecture,"End-to-end design, implementation, testing, and deployment of the FinTech Payment Gateway Integration module.",In Progress,High,Epic,,Unassigned
+US-045: Implement Redis Caching Layer for FinTech Payment Gateway Integration API Endpoints,"As a product developer, I need to implement: Architect high-throughput caching strategy using Redis cluster to achieve <50ms P99 latency.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",To Do,High,User Story,5,Unassigned
+US-046: Database Schema Migration & Index Optimization for FinTech Payment Gateway Integration,"As a product developer, I need to implement: Design PostgreSQL relational schema with partitioned tables, B-tree/GIN indexes, and foreign key constraints.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Review,Low,User Story,8,Unassigned
+US-047: RESTful & GraphQL API Design for FinTech Payment Gateway Integration,"As a product developer, I need to implement: Expose secure REST endpoints with OpenAPI 3.0 specification and GraphQL queries for mobile clients.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",Done,High,User Story,5,Unassigned
+BUG-011: State Sync Failure on React Native Client during offline mode in FinTech Payment Gateway Integration,"Environment: Staging / Production
+
+Issue Description: Local SQLite database fails to reconcile with remote API upon network restoration.
+
+Steps to Reproduce:
+1. Trigger concurrent requests.
+2. Observe server response headers and DB logs.
+
+Expected Result: System gracefully handles concurrency without state corruption.",To Do,Normal,Bug,2,Unassigned
+US-048: Unit & Integration Test Coverage (>85%) for FinTech Payment Gateway Integration,"As a product developer, I need to implement: Write Jest / PyTest test cases ensuring critical business logic path coverage exceeds 85%.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Progress,Low,User Story,3,Unassigned
+US-049: Input Validation & Sanitization Framework for FinTech Payment Gateway Integration,"As a product developer, I need to implement: Implement middleware sanitization against SQL Injection, XSS, and payload manipulation.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",QA Testing,High,User Story,3,Unassigned
+US-050: Asynchronous Event Publishing to Apache Kafka for FinTech Payment Gateway Integration,"As a product developer, I need to implement: Publish transactional domain events to Kafka topic for distributed microservices processing.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",To Do,Low,User Story,8,Unassigned
+US-051: Rate Limiting & DDoS Protection Middleware for FinTech Payment Gateway Integration,"As a product developer, I need to implement: Enforce token bucket algorithm via Redis to prevent API scraping and brute force attacks.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Review,High,User Story,5,Unassigned
+BUG-012: Race Condition causing duplicate transactions in FinTech Payment Gateway Integration,"Environment: Staging / Production
+
+Issue Description: Double click on submit button sends parallel requests resulting in dual database commits.
+
+Steps to Reproduce:
+1. Trigger concurrent requests.
+2. Observe server response headers and DB logs.
+
+Expected Result: System gracefully handles concurrency without state corruption.",In Progress,Urgent,Bug,2,Unassigned
+US-052: UI/UX Component Development in Next.js / Tailwind for FinTech Payment Gateway Integration,"As a product developer, I need to implement: Build accessible, responsive React components matching Figma Design System tokens.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",Done,Low,User Story,5,Unassigned
+US-053: Automated End-to-End E2E Test Suite (Playwright) for FinTech Payment Gateway Integration,"As a product developer, I need to implement: Script cross-browser end-to-end user journeys in Playwright with CI execution.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Progress,High,User Story,5,Unassigned
+US-054: Postman API Test Collection & Newman Integration for FinTech Payment Gateway Integration,"As a product developer, I need to implement: Create parameterized Postman API collection with pre-request scripts and assertions.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",QA Testing,Low,User Story,3,Unassigned
+US-055: Audit Logging & Compliance Event Tracker for FinTech Payment Gateway Integration,"As a product developer, I need to implement: Capture immutable audit logs for administrative actions and security sensitive state changes.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",To Do,High,User Story,5,Unassigned
+BUG-013: Memory Leak in WebSocket Connection Pool during FinTech Payment Gateway Integration sync,"Environment: Staging / Production
+
+Issue Description: Unreleased event listeners lead to steady node.js heap memory escalation under load.
+
+Steps to Reproduce:
+1. Trigger concurrent requests.
+2. Observe server response headers and DB logs.
+
+Expected Result: System gracefully handles concurrency without state corruption.",To Do,High,Bug,2,Unassigned
+US-056: Localization & Multi-Language Support (i18n) for FinTech Payment Gateway Integration,"As a product developer, I need to implement: Implement client and server-side internationalization support for English, Sinhala, and Tamil.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Review,Low,User Story,3,Unassigned
+US-057: Performance Load Testing & Profiling (k6 / Locust) for FinTech Payment Gateway Integration,"As a product developer, I need to implement: Simulate peak concurrency load of 10,000 active users and profile memory/CPU usage.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",Done,High,User Story,5,Unassigned
+US-058: Implement Redis Caching Layer for FinTech Payment Gateway Integration API Endpoints,"As a product developer, I need to implement: Architect high-throughput caching strategy using Redis cluster to achieve <50ms P99 latency.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Progress,Low,User Story,5,Unassigned
+US-059: Database Schema Migration & Index Optimization for FinTech Payment Gateway Integration,"As a product developer, I need to implement: Design PostgreSQL relational schema with partitioned tables, B-tree/GIN indexes, and foreign key constraints.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",QA Testing,High,User Story,8,Unassigned
+BUG-014: SQL Query Timeout on large dataset pagination in FinTech Payment Gateway Integration,"Environment: Staging / Production
+
+Issue Description: Missing index on soft-deleted rows causes full table scan on 5M+ row table.
+
+Steps to Reproduce:
+1. Trigger concurrent requests.
+2. Observe server response headers and DB logs.
+
+Expected Result: System gracefully handles concurrency without state corruption.",In Progress,High,Bug,2,Unassigned
+US-060: RESTful & GraphQL API Design for FinTech Payment Gateway Integration,"As a product developer, I need to implement: Expose secure REST endpoints with OpenAPI 3.0 specification and GraphQL queries for mobile clients.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",To Do,Low,User Story,5,Unassigned
+EPIC-ORD: Order Processing & Shipping Logistics Architecture,"End-to-end design, implementation, testing, and deployment of the Order Processing & Shipping Logistics module.",In Progress,High,Epic,,Unassigned
+US-061: Implement Redis Caching Layer for Order Processing & Shipping Logistics API Endpoints,"As a product developer, I need to implement: Architect high-throughput caching strategy using Redis cluster to achieve <50ms P99 latency.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Progress,High,User Story,5,Unassigned
+US-062: Database Schema Migration & Index Optimization for Order Processing & Shipping Logistics,"As a product developer, I need to implement: Design PostgreSQL relational schema with partitioned tables, B-tree/GIN indexes, and foreign key constraints.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",QA Testing,Low,User Story,8,Unassigned
+US-063: RESTful & GraphQL API Design for Order Processing & Shipping Logistics,"As a product developer, I need to implement: Expose secure REST endpoints with OpenAPI 3.0 specification and GraphQL queries for mobile clients.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",To Do,High,User Story,5,Unassigned
+BUG-015: XSS Vulnerability in un-sanitized user comment field in Order Processing & Shipping Logistics,"Environment: Staging / Production
+
+Issue Description: Script tags executed when rendering rich text user feedback in admin portal.
+
+Steps to Reproduce:
+1. Trigger concurrent requests.
+2. Observe server response headers and DB logs.
+
+Expected Result: System gracefully handles concurrency without state corruption.",To Do,Urgent,Bug,2,Unassigned
+US-064: Unit & Integration Test Coverage (>85%) for Order Processing & Shipping Logistics,"As a product developer, I need to implement: Write Jest / PyTest test cases ensuring critical business logic path coverage exceeds 85%.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Review,Low,User Story,3,Unassigned
+US-065: Input Validation & Sanitization Framework for Order Processing & Shipping Logistics,"As a product developer, I need to implement: Implement middleware sanitization against SQL Injection, XSS, and payload manipulation.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",Done,High,User Story,3,Unassigned
+US-066: Asynchronous Event Publishing to Apache Kafka for Order Processing & Shipping Logistics,"As a product developer, I need to implement: Publish transactional domain events to Kafka topic for distributed microservices processing.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Progress,Low,User Story,8,Unassigned
+US-067: Rate Limiting & DDoS Protection Middleware for Order Processing & Shipping Logistics,"As a product developer, I need to implement: Enforce token bucket algorithm via Redis to prevent API scraping and brute force attacks.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",QA Testing,High,User Story,5,Unassigned
+BUG-016: Token Expiration Mismatch between Auth Service and Gateway in Order Processing & Shipping Logistics,"Environment: Staging / Production
+
+Issue Description: Gateway accepts expired JWT tokens due to clock skew between server instances.
+
+Steps to Reproduce:
+1. Trigger concurrent requests.
+2. Observe server response headers and DB logs.
+
+Expected Result: System gracefully handles concurrency without state corruption.",In Progress,High,Bug,2,Unassigned
+US-068: UI/UX Component Development in Next.js / Tailwind for Order Processing & Shipping Logistics,"As a product developer, I need to implement: Build accessible, responsive React components matching Figma Design System tokens.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",To Do,Low,User Story,5,Unassigned
+US-069: Automated End-to-End E2E Test Suite (Playwright) for Order Processing & Shipping Logistics,"As a product developer, I need to implement: Script cross-browser end-to-end user journeys in Playwright with CI execution.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Review,High,User Story,5,Unassigned
+US-070: Postman API Test Collection & Newman Integration for Order Processing & Shipping Logistics,"As a product developer, I need to implement: Create parameterized Postman API collection with pre-request scripts and assertions.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",Done,Low,User Story,3,Unassigned
+US-071: Audit Logging & Compliance Event Tracker for Order Processing & Shipping Logistics,"As a product developer, I need to implement: Capture immutable audit logs for administrative actions and security sensitive state changes.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Progress,High,User Story,5,Unassigned
+BUG-017: State Sync Failure on React Native Client during offline mode in Order Processing & Shipping Logistics,"Environment: Staging / Production
+
+Issue Description: Local SQLite database fails to reconcile with remote API upon network restoration.
+
+Steps to Reproduce:
+1. Trigger concurrent requests.
+2. Observe server response headers and DB logs.
+
+Expected Result: System gracefully handles concurrency without state corruption.",To Do,Normal,Bug,2,Unassigned
+US-072: Localization & Multi-Language Support (i18n) for Order Processing & Shipping Logistics,"As a product developer, I need to implement: Implement client and server-side internationalization support for English, Sinhala, and Tamil.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",QA Testing,Low,User Story,3,Unassigned
+US-073: Performance Load Testing & Profiling (k6 / Locust) for Order Processing & Shipping Logistics,"As a product developer, I need to implement: Simulate peak concurrency load of 10,000 active users and profile memory/CPU usage.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",To Do,High,User Story,5,Unassigned
+US-074: Implement Redis Caching Layer for Order Processing & Shipping Logistics API Endpoints,"As a product developer, I need to implement: Architect high-throughput caching strategy using Redis cluster to achieve <50ms P99 latency.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Review,Low,User Story,5,Unassigned
+US-075: Database Schema Migration & Index Optimization for Order Processing & Shipping Logistics,"As a product developer, I need to implement: Design PostgreSQL relational schema with partitioned tables, B-tree/GIN indexes, and foreign key constraints.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",Done,High,User Story,8,Unassigned
+BUG-018: Race Condition causing duplicate transactions in Order Processing & Shipping Logistics,"Environment: Staging / Production
+
+Issue Description: Double click on submit button sends parallel requests resulting in dual database commits.
+
+Steps to Reproduce:
+1. Trigger concurrent requests.
+2. Observe server response headers and DB logs.
+
+Expected Result: System gracefully handles concurrency without state corruption.",In Progress,Urgent,Bug,2,Unassigned
+EPIC-NOTIF: Real-Time Notification Service (Kafka/WebSockets) Architecture,"End-to-end design, implementation, testing, and deployment of the Real-Time Notification Service (Kafka/WebSockets) module.",In Progress,High,Epic,,Unassigned
+US-076: Implement Redis Caching Layer for Real-Time Notification Service (Kafka/WebSockets) API Endpoints,"As a product developer, I need to implement: Architect high-throughput caching strategy using Redis cluster to achieve <50ms P99 latency.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Progress,Urgent,User Story,5,Unassigned
+US-077: Database Schema Migration & Index Optimization for Real-Time Notification Service (Kafka/WebSockets),"As a product developer, I need to implement: Design PostgreSQL relational schema with partitioned tables, B-tree/GIN indexes, and foreign key constraints.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",QA Testing,Normal,User Story,8,Unassigned
+US-078: RESTful & GraphQL API Design for Real-Time Notification Service (Kafka/WebSockets),"As a product developer, I need to implement: Expose secure REST endpoints with OpenAPI 3.0 specification and GraphQL queries for mobile clients.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",To Do,Urgent,User Story,5,Unassigned
+US-079: Unit & Integration Test Coverage (>85%) for Real-Time Notification Service (Kafka/WebSockets),"As a product developer, I need to implement: Write Jest / PyTest test cases ensuring critical business logic path coverage exceeds 85%.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Review,Normal,User Story,3,Unassigned
+BUG-019: Memory Leak in WebSocket Connection Pool during Real-Time Notification Service (Kafka/WebSockets) sync,"Environment: Staging / Production
+
+Issue Description: Unreleased event listeners lead to steady node.js heap memory escalation under load.
+
+Steps to Reproduce:
+1. Trigger concurrent requests.
+2. Observe server response headers and DB logs.
+
+Expected Result: System gracefully handles concurrency without state corruption.",To Do,High,Bug,2,Unassigned
+US-080: Input Validation & Sanitization Framework for Real-Time Notification Service (Kafka/WebSockets),"As a product developer, I need to implement: Implement middleware sanitization against SQL Injection, XSS, and payload manipulation.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",Done,Urgent,User Story,3,Unassigned
+US-081: Asynchronous Event Publishing to Apache Kafka for Real-Time Notification Service (Kafka/WebSockets),"As a product developer, I need to implement: Publish transactional domain events to Kafka topic for distributed microservices processing.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Progress,Normal,User Story,8,Unassigned
+US-082: Rate Limiting & DDoS Protection Middleware for Real-Time Notification Service (Kafka/WebSockets),"As a product developer, I need to implement: Enforce token bucket algorithm via Redis to prevent API scraping and brute force attacks.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",QA Testing,Urgent,User Story,5,Unassigned
+US-083: UI/UX Component Development in Next.js / Tailwind for Real-Time Notification Service (Kafka/WebSockets),"As a product developer, I need to implement: Build accessible, responsive React components matching Figma Design System tokens.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",To Do,Normal,User Story,5,Unassigned
+BUG-020: SQL Query Timeout on large dataset pagination in Real-Time Notification Service (Kafka/WebSockets),"Environment: Staging / Production
+
+Issue Description: Missing index on soft-deleted rows causes full table scan on 5M+ row table.
+
+Steps to Reproduce:
+1. Trigger concurrent requests.
+2. Observe server response headers and DB logs.
+
+Expected Result: System gracefully handles concurrency without state corruption.",In Progress,High,Bug,2,Unassigned
+US-084: Automated End-to-End E2E Test Suite (Playwright) for Real-Time Notification Service (Kafka/WebSockets),"As a product developer, I need to implement: Script cross-browser end-to-end user journeys in Playwright with CI execution.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Review,Urgent,User Story,5,Unassigned
+US-085: Postman API Test Collection & Newman Integration for Real-Time Notification Service (Kafka/WebSockets),"As a product developer, I need to implement: Create parameterized Postman API collection with pre-request scripts and assertions.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",Done,Normal,User Story,3,Unassigned
+US-086: Audit Logging & Compliance Event Tracker for Real-Time Notification Service (Kafka/WebSockets),"As a product developer, I need to implement: Capture immutable audit logs for administrative actions and security sensitive state changes.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Progress,Urgent,User Story,5,Unassigned
+US-087: Localization & Multi-Language Support (i18n) for Real-Time Notification Service (Kafka/WebSockets),"As a product developer, I need to implement: Implement client and server-side internationalization support for English, Sinhala, and Tamil.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",QA Testing,Normal,User Story,3,Unassigned
+BUG-021: XSS Vulnerability in un-sanitized user comment field in Real-Time Notification Service (Kafka/WebSockets),"Environment: Staging / Production
+
+Issue Description: Script tags executed when rendering rich text user feedback in admin portal.
+
+Steps to Reproduce:
+1. Trigger concurrent requests.
+2. Observe server response headers and DB logs.
+
+Expected Result: System gracefully handles concurrency without state corruption.",To Do,Urgent,Bug,2,Unassigned
+EPIC-REC: AI Recommendation & Search Personalization Architecture,"End-to-end design, implementation, testing, and deployment of the AI Recommendation & Search Personalization module.",In Progress,High,Epic,,Unassigned
+US-088: Implement Redis Caching Layer for AI Recommendation & Search Personalization API Endpoints,"As a product developer, I need to implement: Architect high-throughput caching strategy using Redis cluster to achieve <50ms P99 latency.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",QA Testing,Urgent,User Story,5,Unassigned
+US-089: Database Schema Migration & Index Optimization for AI Recommendation & Search Personalization,"As a product developer, I need to implement: Design PostgreSQL relational schema with partitioned tables, B-tree/GIN indexes, and foreign key constraints.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",To Do,Normal,User Story,8,Unassigned
+US-090: RESTful & GraphQL API Design for AI Recommendation & Search Personalization,"As a product developer, I need to implement: Expose secure REST endpoints with OpenAPI 3.0 specification and GraphQL queries for mobile clients.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Review,Urgent,User Story,5,Unassigned
+US-091: Unit & Integration Test Coverage (>85%) for AI Recommendation & Search Personalization,"As a product developer, I need to implement: Write Jest / PyTest test cases ensuring critical business logic path coverage exceeds 85%.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",Done,Normal,User Story,3,Unassigned
+BUG-022: Token Expiration Mismatch between Auth Service and Gateway in AI Recommendation & Search Personalization,"Environment: Staging / Production
+
+Issue Description: Gateway accepts expired JWT tokens due to clock skew between server instances.
+
+Steps to Reproduce:
+1. Trigger concurrent requests.
+2. Observe server response headers and DB logs.
+
+Expected Result: System gracefully handles concurrency without state corruption.",In Progress,High,Bug,2,Unassigned
+US-092: Input Validation & Sanitization Framework for AI Recommendation & Search Personalization,"As a product developer, I need to implement: Implement middleware sanitization against SQL Injection, XSS, and payload manipulation.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Progress,Urgent,User Story,3,Unassigned
+US-093: Asynchronous Event Publishing to Apache Kafka for AI Recommendation & Search Personalization,"As a product developer, I need to implement: Publish transactional domain events to Kafka topic for distributed microservices processing.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",QA Testing,Normal,User Story,8,Unassigned
+US-094: Rate Limiting & DDoS Protection Middleware for AI Recommendation & Search Personalization,"As a product developer, I need to implement: Enforce token bucket algorithm via Redis to prevent API scraping and brute force attacks.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",To Do,Urgent,User Story,5,Unassigned
+US-095: UI/UX Component Development in Next.js / Tailwind for AI Recommendation & Search Personalization,"As a product developer, I need to implement: Build accessible, responsive React components matching Figma Design System tokens.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Review,Normal,User Story,5,Unassigned
+BUG-023: State Sync Failure on React Native Client during offline mode in AI Recommendation & Search Personalization,"Environment: Staging / Production
+
+Issue Description: Local SQLite database fails to reconcile with remote API upon network restoration.
+
+Steps to Reproduce:
+1. Trigger concurrent requests.
+2. Observe server response headers and DB logs.
+
+Expected Result: System gracefully handles concurrency without state corruption.",To Do,Normal,Bug,2,Unassigned
+US-096: Automated End-to-End E2E Test Suite (Playwright) for AI Recommendation & Search Personalization,"As a product developer, I need to implement: Script cross-browser end-to-end user journeys in Playwright with CI execution.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",Done,Urgent,User Story,5,Unassigned
+US-097: Postman API Test Collection & Newman Integration for AI Recommendation & Search Personalization,"As a product developer, I need to implement: Create parameterized Postman API collection with pre-request scripts and assertions.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Progress,Normal,User Story,3,Unassigned
+EPIC-REV: Product Reviews & Automated Moderation Architecture,"End-to-end design, implementation, testing, and deployment of the Product Reviews & Automated Moderation module.",In Progress,High,Epic,,Unassigned
+US-098: Implement Redis Caching Layer for Product Reviews & Automated Moderation API Endpoints,"As a product developer, I need to implement: Architect high-throughput caching strategy using Redis cluster to achieve <50ms P99 latency.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",QA Testing,Normal,User Story,5,Unassigned
+US-099: Database Schema Migration & Index Optimization for Product Reviews & Automated Moderation,"As a product developer, I need to implement: Design PostgreSQL relational schema with partitioned tables, B-tree/GIN indexes, and foreign key constraints.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",To Do,Urgent,User Story,8,Unassigned
+BUG-024: Race Condition causing duplicate transactions in Product Reviews & Automated Moderation,"Environment: Staging / Production
+
+Issue Description: Double click on submit button sends parallel requests resulting in dual database commits.
+
+Steps to Reproduce:
+1. Trigger concurrent requests.
+2. Observe server response headers and DB logs.
+
+Expected Result: System gracefully handles concurrency without state corruption.",In Progress,Urgent,Bug,2,Unassigned
+US-100: RESTful & GraphQL API Design for Product Reviews & Automated Moderation,"As a product developer, I need to implement: Expose secure REST endpoints with OpenAPI 3.0 specification and GraphQL queries for mobile clients.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Review,Normal,User Story,5,Unassigned
+US-101: Unit & Integration Test Coverage (>85%) for Product Reviews & Automated Moderation,"As a product developer, I need to implement: Write Jest / PyTest test cases ensuring critical business logic path coverage exceeds 85%.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",Done,Urgent,User Story,3,Unassigned
+US-102: Input Validation & Sanitization Framework for Product Reviews & Automated Moderation,"As a product developer, I need to implement: Implement middleware sanitization against SQL Injection, XSS, and payload manipulation.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Progress,Normal,User Story,3,Unassigned
+US-103: Asynchronous Event Publishing to Apache Kafka for Product Reviews & Automated Moderation,"As a product developer, I need to implement: Publish transactional domain events to Kafka topic for distributed microservices processing.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",QA Testing,Urgent,User Story,8,Unassigned
+BUG-025: Memory Leak in WebSocket Connection Pool during Product Reviews & Automated Moderation sync,"Environment: Staging / Production
+
+Issue Description: Unreleased event listeners lead to steady node.js heap memory escalation under load.
+
+Steps to Reproduce:
+1. Trigger concurrent requests.
+2. Observe server response headers and DB logs.
+
+Expected Result: System gracefully handles concurrency without state corruption.",To Do,High,Bug,2,Unassigned
+US-104: Rate Limiting & DDoS Protection Middleware for Product Reviews & Automated Moderation,"As a product developer, I need to implement: Enforce token bucket algorithm via Redis to prevent API scraping and brute force attacks.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",To Do,Normal,User Story,5,Unassigned
+US-105: UI/UX Component Development in Next.js / Tailwind for Product Reviews & Automated Moderation,"As a product developer, I need to implement: Build accessible, responsive React components matching Figma Design System tokens.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Review,Urgent,User Story,5,Unassigned
+US-106: Automated End-to-End E2E Test Suite (Playwright) for Product Reviews & Automated Moderation,"As a product developer, I need to implement: Script cross-browser end-to-end user journeys in Playwright with CI execution.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",Done,Normal,User Story,5,Unassigned
+US-107: Postman API Test Collection & Newman Integration for Product Reviews & Automated Moderation,"As a product developer, I need to implement: Create parameterized Postman API collection with pre-request scripts and assertions.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Progress,Urgent,User Story,3,Unassigned
+BUG-026: SQL Query Timeout on large dataset pagination in Product Reviews & Automated Moderation,"Environment: Staging / Production
+
+Issue Description: Missing index on soft-deleted rows causes full table scan on 5M+ row table.
+
+Steps to Reproduce:
+1. Trigger concurrent requests.
+2. Observe server response headers and DB logs.
+
+Expected Result: System gracefully handles concurrency without state corruption.",In Progress,High,Bug,2,Unassigned
+"EPIC-PROMO: Coupons, Discounts & Tiered Loyalty System Architecture","End-to-end design, implementation, testing, and deployment of the Coupons, Discounts & Tiered Loyalty System module.",In Progress,High,Epic,,Unassigned
+"US-108: Implement Redis Caching Layer for Coupons, Discounts & Tiered Loyalty System API Endpoints","As a product developer, I need to implement: Architect high-throughput caching strategy using Redis cluster to achieve <50ms P99 latency.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",QA Testing,Urgent,User Story,5,Unassigned
+"US-109: Database Schema Migration & Index Optimization for Coupons, Discounts & Tiered Loyalty System","As a product developer, I need to implement: Design PostgreSQL relational schema with partitioned tables, B-tree/GIN indexes, and foreign key constraints.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",To Do,Normal,User Story,8,Unassigned
+"US-110: RESTful & GraphQL API Design for Coupons, Discounts & Tiered Loyalty System","As a product developer, I need to implement: Expose secure REST endpoints with OpenAPI 3.0 specification and GraphQL queries for mobile clients.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Review,Urgent,User Story,5,Unassigned
+"US-111: Unit & Integration Test Coverage (>85%) for Coupons, Discounts & Tiered Loyalty System","As a product developer, I need to implement: Write Jest / PyTest test cases ensuring critical business logic path coverage exceeds 85%.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",Done,Normal,User Story,3,Unassigned
+"BUG-027: XSS Vulnerability in un-sanitized user comment field in Coupons, Discounts & Tiered Loyalty System","Environment: Staging / Production
+
+Issue Description: Script tags executed when rendering rich text user feedback in admin portal.
+
+Steps to Reproduce:
+1. Trigger concurrent requests.
+2. Observe server response headers and DB logs.
+
+Expected Result: System gracefully handles concurrency without state corruption.",To Do,Urgent,Bug,2,Unassigned
+"US-112: Input Validation & Sanitization Framework for Coupons, Discounts & Tiered Loyalty System","As a product developer, I need to implement: Implement middleware sanitization against SQL Injection, XSS, and payload manipulation.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Progress,Urgent,User Story,3,Unassigned
+"US-113: Asynchronous Event Publishing to Apache Kafka for Coupons, Discounts & Tiered Loyalty System","As a product developer, I need to implement: Publish transactional domain events to Kafka topic for distributed microservices processing.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",QA Testing,Normal,User Story,8,Unassigned
+"US-114: Rate Limiting & DDoS Protection Middleware for Coupons, Discounts & Tiered Loyalty System","As a product developer, I need to implement: Enforce token bucket algorithm via Redis to prevent API scraping and brute force attacks.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",To Do,Urgent,User Story,5,Unassigned
+"US-115: UI/UX Component Development in Next.js / Tailwind for Coupons, Discounts & Tiered Loyalty System","As a product developer, I need to implement: Build accessible, responsive React components matching Figma Design System tokens.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Review,Normal,User Story,5,Unassigned
+"BUG-028: Token Expiration Mismatch between Auth Service and Gateway in Coupons, Discounts & Tiered Loyalty System","Environment: Staging / Production
+
+Issue Description: Gateway accepts expired JWT tokens due to clock skew between server instances.
+
+Steps to Reproduce:
+1. Trigger concurrent requests.
+2. Observe server response headers and DB logs.
+
+Expected Result: System gracefully handles concurrency without state corruption.",In Progress,High,Bug,2,Unassigned
+"US-116: Automated End-to-End E2E Test Suite (Playwright) for Coupons, Discounts & Tiered Loyalty System","As a product developer, I need to implement: Script cross-browser end-to-end user journeys in Playwright with CI execution.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",Done,Urgent,User Story,5,Unassigned
+"US-117: Postman API Test Collection & Newman Integration for Coupons, Discounts & Tiered Loyalty System","As a product developer, I need to implement: Create parameterized Postman API collection with pre-request scripts and assertions.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Progress,Normal,User Story,3,Unassigned
+"US-118: Audit Logging & Compliance Event Tracker for Coupons, Discounts & Tiered Loyalty System","As a product developer, I need to implement: Capture immutable audit logs for administrative actions and security sensitive state changes.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",QA Testing,Urgent,User Story,5,Unassigned
+"US-119: Localization & Multi-Language Support (i18n) for Coupons, Discounts & Tiered Loyalty System","As a product developer, I need to implement: Implement client and server-side internationalization support for English, Sinhala, and Tamil.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",To Do,Normal,User Story,3,Unassigned
+"BUG-029: State Sync Failure on React Native Client during offline mode in Coupons, Discounts & Tiered Loyalty System","Environment: Staging / Production
+
+Issue Description: Local SQLite database fails to reconcile with remote API upon network restoration.
+
+Steps to Reproduce:
+1. Trigger concurrent requests.
+2. Observe server response headers and DB logs.
+
+Expected Result: System gracefully handles concurrency without state corruption.",To Do,Normal,Bug,2,Unassigned
+EPIC-ADM: Enterprise BI & Executive Dashboard Architecture,"End-to-end design, implementation, testing, and deployment of the Enterprise BI & Executive Dashboard module.",In Progress,High,Epic,,Unassigned
+US-120: Implement Redis Caching Layer for Enterprise BI & Executive Dashboard API Endpoints,"As a product developer, I need to implement: Architect high-throughput caching strategy using Redis cluster to achieve <50ms P99 latency.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",To Do,Urgent,User Story,5,Unassigned
+US-121: Database Schema Migration & Index Optimization for Enterprise BI & Executive Dashboard,"As a product developer, I need to implement: Design PostgreSQL relational schema with partitioned tables, B-tree/GIN indexes, and foreign key constraints.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Review,Normal,User Story,8,Unassigned
+US-122: RESTful & GraphQL API Design for Enterprise BI & Executive Dashboard,"As a product developer, I need to implement: Expose secure REST endpoints with OpenAPI 3.0 specification and GraphQL queries for mobile clients.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",Done,Urgent,User Story,5,Unassigned
+US-123: Unit & Integration Test Coverage (>85%) for Enterprise BI & Executive Dashboard,"As a product developer, I need to implement: Write Jest / PyTest test cases ensuring critical business logic path coverage exceeds 85%.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Progress,Normal,User Story,3,Unassigned
+BUG-030: Race Condition causing duplicate transactions in Enterprise BI & Executive Dashboard,"Environment: Staging / Production
+
+Issue Description: Double click on submit button sends parallel requests resulting in dual database commits.
+
+Steps to Reproduce:
+1. Trigger concurrent requests.
+2. Observe server response headers and DB logs.
+
+Expected Result: System gracefully handles concurrency without state corruption.",In Progress,Urgent,Bug,2,Unassigned
+US-124: Input Validation & Sanitization Framework for Enterprise BI & Executive Dashboard,"As a product developer, I need to implement: Implement middleware sanitization against SQL Injection, XSS, and payload manipulation.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",QA Testing,Urgent,User Story,3,Unassigned
+US-125: Asynchronous Event Publishing to Apache Kafka for Enterprise BI & Executive Dashboard,"As a product developer, I need to implement: Publish transactional domain events to Kafka topic for distributed microservices processing.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",To Do,Normal,User Story,8,Unassigned
+US-126: Rate Limiting & DDoS Protection Middleware for Enterprise BI & Executive Dashboard,"As a product developer, I need to implement: Enforce token bucket algorithm via Redis to prevent API scraping and brute force attacks.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Review,Urgent,User Story,5,Unassigned
+US-127: UI/UX Component Development in Next.js / Tailwind for Enterprise BI & Executive Dashboard,"As a product developer, I need to implement: Build accessible, responsive React components matching Figma Design System tokens.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",Done,Normal,User Story,5,Unassigned
+BUG-031: Memory Leak in WebSocket Connection Pool during Enterprise BI & Executive Dashboard sync,"Environment: Staging / Production
+
+Issue Description: Unreleased event listeners lead to steady node.js heap memory escalation under load.
+
+Steps to Reproduce:
+1. Trigger concurrent requests.
+2. Observe server response headers and DB logs.
+
+Expected Result: System gracefully handles concurrency without state corruption.",To Do,High,Bug,2,Unassigned
+US-128: Automated End-to-End E2E Test Suite (Playwright) for Enterprise BI & Executive Dashboard,"As a product developer, I need to implement: Script cross-browser end-to-end user journeys in Playwright with CI execution.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Progress,Urgent,User Story,5,Unassigned
+US-129: Postman API Test Collection & Newman Integration for Enterprise BI & Executive Dashboard,"As a product developer, I need to implement: Create parameterized Postman API collection with pre-request scripts and assertions.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",QA Testing,Normal,User Story,3,Unassigned
+US-130: Audit Logging & Compliance Event Tracker for Enterprise BI & Executive Dashboard,"As a product developer, I need to implement: Capture immutable audit logs for administrative actions and security sensitive state changes.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",To Do,Urgent,User Story,5,Unassigned
+US-131: Localization & Multi-Language Support (i18n) for Enterprise BI & Executive Dashboard,"As a product developer, I need to implement: Implement client and server-side internationalization support for English, Sinhala, and Tamil.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Review,Normal,User Story,3,Unassigned
+BUG-032: SQL Query Timeout on large dataset pagination in Enterprise BI & Executive Dashboard,"Environment: Staging / Production
+
+Issue Description: Missing index on soft-deleted rows causes full table scan on 5M+ row table.
+
+Steps to Reproduce:
+1. Trigger concurrent requests.
+2. Observe server response headers and DB logs.
+
+Expected Result: System gracefully handles concurrency without state corruption.",In Progress,High,Bug,2,Unassigned
+"EPIC-SEC: GDPR, PCI-DSS & Security Hardening Architecture","End-to-end design, implementation, testing, and deployment of the GDPR, PCI-DSS & Security Hardening module.",In Progress,High,Epic,,Unassigned
+"US-132: Implement Redis Caching Layer for GDPR, PCI-DSS & Security Hardening API Endpoints","As a product developer, I need to implement: Architect high-throughput caching strategy using Redis cluster to achieve <50ms P99 latency.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Review,Urgent,User Story,5,Unassigned
+"US-133: Database Schema Migration & Index Optimization for GDPR, PCI-DSS & Security Hardening","As a product developer, I need to implement: Design PostgreSQL relational schema with partitioned tables, B-tree/GIN indexes, and foreign key constraints.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",Done,Normal,User Story,8,Unassigned
+"US-134: RESTful & GraphQL API Design for GDPR, PCI-DSS & Security Hardening","As a product developer, I need to implement: Expose secure REST endpoints with OpenAPI 3.0 specification and GraphQL queries for mobile clients.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Progress,Urgent,User Story,5,Unassigned
+"US-135: Unit & Integration Test Coverage (>85%) for GDPR, PCI-DSS & Security Hardening","As a product developer, I need to implement: Write Jest / PyTest test cases ensuring critical business logic path coverage exceeds 85%.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",QA Testing,Normal,User Story,3,Unassigned
+"BUG-033: XSS Vulnerability in un-sanitized user comment field in GDPR, PCI-DSS & Security Hardening","Environment: Staging / Production
+
+Issue Description: Script tags executed when rendering rich text user feedback in admin portal.
+
+Steps to Reproduce:
+1. Trigger concurrent requests.
+2. Observe server response headers and DB logs.
+
+Expected Result: System gracefully handles concurrency without state corruption.",To Do,Urgent,Bug,2,Unassigned
+"US-136: Input Validation & Sanitization Framework for GDPR, PCI-DSS & Security Hardening","As a product developer, I need to implement: Implement middleware sanitization against SQL Injection, XSS, and payload manipulation.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",To Do,Urgent,User Story,3,Unassigned
+"US-137: Asynchronous Event Publishing to Apache Kafka for GDPR, PCI-DSS & Security Hardening","As a product developer, I need to implement: Publish transactional domain events to Kafka topic for distributed microservices processing.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Review,Normal,User Story,8,Unassigned
+"US-138: Rate Limiting & DDoS Protection Middleware for GDPR, PCI-DSS & Security Hardening","As a product developer, I need to implement: Enforce token bucket algorithm via Redis to prevent API scraping and brute force attacks.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",Done,Urgent,User Story,5,Unassigned
+"US-139: UI/UX Component Development in Next.js / Tailwind for GDPR, PCI-DSS & Security Hardening","As a product developer, I need to implement: Build accessible, responsive React components matching Figma Design System tokens.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Progress,Normal,User Story,5,Unassigned
+"BUG-034: Token Expiration Mismatch between Auth Service and Gateway in GDPR, PCI-DSS & Security Hardening","Environment: Staging / Production
+
+Issue Description: Gateway accepts expired JWT tokens due to clock skew between server instances.
+
+Steps to Reproduce:
+1. Trigger concurrent requests.
+2. Observe server response headers and DB logs.
+
+Expected Result: System gracefully handles concurrency without state corruption.",In Progress,High,Bug,2,Unassigned
+"US-140: Automated End-to-End E2E Test Suite (Playwright) for GDPR, PCI-DSS & Security Hardening","As a product developer, I need to implement: Script cross-browser end-to-end user journeys in Playwright with CI execution.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",QA Testing,Urgent,User Story,5,Unassigned
+"US-141: Postman API Test Collection & Newman Integration for GDPR, PCI-DSS & Security Hardening","As a product developer, I need to implement: Create parameterized Postman API collection with pre-request scripts and assertions.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",To Do,Normal,User Story,3,Unassigned
+"US-142: Audit Logging & Compliance Event Tracker for GDPR, PCI-DSS & Security Hardening","As a product developer, I need to implement: Capture immutable audit logs for administrative actions and security sensitive state changes.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Review,Urgent,User Story,5,Unassigned
+"US-143: Localization & Multi-Language Support (i18n) for GDPR, PCI-DSS & Security Hardening","As a product developer, I need to implement: Implement client and server-side internationalization support for English, Sinhala, and Tamil.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",Done,Normal,User Story,3,Unassigned
+"BUG-035: State Sync Failure on React Native Client during offline mode in GDPR, PCI-DSS & Security Hardening","Environment: Staging / Production
+
+Issue Description: Local SQLite database fails to reconcile with remote API upon network restoration.
+
+Steps to Reproduce:
+1. Trigger concurrent requests.
+2. Observe server response headers and DB logs.
+
+Expected Result: System gracefully handles concurrency without state corruption.",To Do,Normal,Bug,2,Unassigned
+"EPIC-DEVOPS: Kubernetes, CI/CD & Cloud Infrastructure Architecture","End-to-end design, implementation, testing, and deployment of the Kubernetes, CI/CD & Cloud Infrastructure module.",In Progress,High,Epic,,Unassigned
+"US-144: Implement Redis Caching Layer for Kubernetes, CI/CD & Cloud Infrastructure API Endpoints","As a product developer, I need to implement: Architect high-throughput caching strategy using Redis cluster to achieve <50ms P99 latency.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",Done,Urgent,User Story,5,Unassigned
+"US-145: Database Schema Migration & Index Optimization for Kubernetes, CI/CD & Cloud Infrastructure","As a product developer, I need to implement: Design PostgreSQL relational schema with partitioned tables, B-tree/GIN indexes, and foreign key constraints.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Progress,Normal,User Story,8,Unassigned
+"US-146: RESTful & GraphQL API Design for Kubernetes, CI/CD & Cloud Infrastructure","As a product developer, I need to implement: Expose secure REST endpoints with OpenAPI 3.0 specification and GraphQL queries for mobile clients.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",QA Testing,Urgent,User Story,5,Unassigned
+"US-147: Unit & Integration Test Coverage (>85%) for Kubernetes, CI/CD & Cloud Infrastructure","As a product developer, I need to implement: Write Jest / PyTest test cases ensuring critical business logic path coverage exceeds 85%.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",To Do,Normal,User Story,3,Unassigned
+"BUG-036: Race Condition causing duplicate transactions in Kubernetes, CI/CD & Cloud Infrastructure","Environment: Staging / Production
+
+Issue Description: Double click on submit button sends parallel requests resulting in dual database commits.
+
+Steps to Reproduce:
+1. Trigger concurrent requests.
+2. Observe server response headers and DB logs.
+
+Expected Result: System gracefully handles concurrency without state corruption.",In Progress,Urgent,Bug,2,Unassigned
+"US-148: Input Validation & Sanitization Framework for Kubernetes, CI/CD & Cloud Infrastructure","As a product developer, I need to implement: Implement middleware sanitization against SQL Injection, XSS, and payload manipulation.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Review,Urgent,User Story,3,Unassigned
+"US-149: Asynchronous Event Publishing to Apache Kafka for Kubernetes, CI/CD & Cloud Infrastructure","As a product developer, I need to implement: Publish transactional domain events to Kafka topic for distributed microservices processing.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",Done,Normal,User Story,8,Unassigned
+"US-150: Rate Limiting & DDoS Protection Middleware for Kubernetes, CI/CD & Cloud Infrastructure","As a product developer, I need to implement: Enforce token bucket algorithm via Redis to prevent API scraping and brute force attacks.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Progress,Urgent,User Story,5,Unassigned
+"US-151: UI/UX Component Development in Next.js / Tailwind for Kubernetes, CI/CD & Cloud Infrastructure","As a product developer, I need to implement: Build accessible, responsive React components matching Figma Design System tokens.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",QA Testing,Normal,User Story,5,Unassigned
+"BUG-037: Memory Leak in WebSocket Connection Pool during Kubernetes, CI/CD & Cloud Infrastructure sync","Environment: Staging / Production
+
+Issue Description: Unreleased event listeners lead to steady node.js heap memory escalation under load.
+
+Steps to Reproduce:
+1. Trigger concurrent requests.
+2. Observe server response headers and DB logs.
+
+Expected Result: System gracefully handles concurrency without state corruption.",To Do,High,Bug,2,Unassigned
+"US-152: Automated End-to-End E2E Test Suite (Playwright) for Kubernetes, CI/CD & Cloud Infrastructure","As a product developer, I need to implement: Script cross-browser end-to-end user journeys in Playwright with CI execution.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",To Do,Urgent,User Story,5,Unassigned
+"US-153: Postman API Test Collection & Newman Integration for Kubernetes, CI/CD & Cloud Infrastructure","As a product developer, I need to implement: Create parameterized Postman API collection with pre-request scripts and assertions.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Review,Normal,User Story,3,Unassigned
+"US-154: Audit Logging & Compliance Event Tracker for Kubernetes, CI/CD & Cloud Infrastructure","As a product developer, I need to implement: Capture immutable audit logs for administrative actions and security sensitive state changes.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",Done,Urgent,User Story,5,Unassigned
+"US-155: Localization & Multi-Language Support (i18n) for Kubernetes, CI/CD & Cloud Infrastructure","As a product developer, I need to implement: Implement client and server-side internationalization support for English, Sinhala, and Tamil.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Progress,Normal,User Story,3,Unassigned
+"BUG-038: SQL Query Timeout on large dataset pagination in Kubernetes, CI/CD & Cloud Infrastructure","Environment: Staging / Production
+
+Issue Description: Missing index on soft-deleted rows causes full table scan on 5M+ row table.
+
+Steps to Reproduce:
+1. Trigger concurrent requests.
+2. Observe server response headers and DB logs.
+
+Expected Result: System gracefully handles concurrency without state corruption.",In Progress,High,Bug,2,Unassigned
+"US-156: Performance Load Testing & Profiling (k6 / Locust) for Kubernetes, CI/CD & Cloud Infrastructure","As a product developer, I need to implement: Simulate peak concurrency load of 10,000 active users and profile memory/CPU usage.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",QA Testing,Urgent,User Story,5,Unassigned
+"US-157: Implement Redis Caching Layer for Kubernetes, CI/CD & Cloud Infrastructure API Endpoints","As a product developer, I need to implement: Architect high-throughput caching strategy using Redis cluster to achieve <50ms P99 latency.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",To Do,Normal,User Story,5,Unassigned
+"US-158: Database Schema Migration & Index Optimization for Kubernetes, CI/CD & Cloud Infrastructure","As a product developer, I need to implement: Design PostgreSQL relational schema with partitioned tables, B-tree/GIN indexes, and foreign key constraints.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Review,Urgent,User Story,8,Unassigned
+EPIC-QA: Playwright & Postman Test Automation Framework Architecture,"End-to-end design, implementation, testing, and deployment of the Playwright & Postman Test Automation Framework module.",In Progress,High,Epic,,Unassigned
+US-159: Implement Redis Caching Layer for Playwright & Postman Test Automation Framework API Endpoints,"As a product developer, I need to implement: Architect high-throughput caching strategy using Redis cluster to achieve <50ms P99 latency.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",Done,Low,User Story,5,Unassigned
+BUG-039: XSS Vulnerability in un-sanitized user comment field in Playwright & Postman Test Automation Framework,"Environment: Staging / Production
+
+Issue Description: Script tags executed when rendering rich text user feedback in admin portal.
+
+Steps to Reproduce:
+1. Trigger concurrent requests.
+2. Observe server response headers and DB logs.
+
+Expected Result: System gracefully handles concurrency without state corruption.",To Do,Urgent,Bug,2,Unassigned
+US-160: Database Schema Migration & Index Optimization for Playwright & Postman Test Automation Framework,"As a product developer, I need to implement: Design PostgreSQL relational schema with partitioned tables, B-tree/GIN indexes, and foreign key constraints.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Progress,High,User Story,8,Unassigned
+US-161: RESTful & GraphQL API Design for Playwright & Postman Test Automation Framework,"As a product developer, I need to implement: Expose secure REST endpoints with OpenAPI 3.0 specification and GraphQL queries for mobile clients.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",QA Testing,Low,User Story,5,Unassigned
+US-162: Unit & Integration Test Coverage (>85%) for Playwright & Postman Test Automation Framework,"As a product developer, I need to implement: Write Jest / PyTest test cases ensuring critical business logic path coverage exceeds 85%.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",To Do,High,User Story,3,Unassigned
+US-163: Input Validation & Sanitization Framework for Playwright & Postman Test Automation Framework,"As a product developer, I need to implement: Implement middleware sanitization against SQL Injection, XSS, and payload manipulation.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Review,Low,User Story,3,Unassigned
+BUG-040: Token Expiration Mismatch between Auth Service and Gateway in Playwright & Postman Test Automation Framework,"Environment: Staging / Production
+
+Issue Description: Gateway accepts expired JWT tokens due to clock skew between server instances.
+
+Steps to Reproduce:
+1. Trigger concurrent requests.
+2. Observe server response headers and DB logs.
+
+Expected Result: System gracefully handles concurrency without state corruption.",In Progress,High,Bug,2,Unassigned
+US-164: Asynchronous Event Publishing to Apache Kafka for Playwright & Postman Test Automation Framework,"As a product developer, I need to implement: Publish transactional domain events to Kafka topic for distributed microservices processing.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",Done,High,User Story,8,Unassigned
+US-165: Rate Limiting & DDoS Protection Middleware for Playwright & Postman Test Automation Framework,"As a product developer, I need to implement: Enforce token bucket algorithm via Redis to prevent API scraping and brute force attacks.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Progress,Low,User Story,5,Unassigned
+US-166: UI/UX Component Development in Next.js / Tailwind for Playwright & Postman Test Automation Framework,"As a product developer, I need to implement: Build accessible, responsive React components matching Figma Design System tokens.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",QA Testing,High,User Story,5,Unassigned
+US-167: Automated End-to-End E2E Test Suite (Playwright) for Playwright & Postman Test Automation Framework,"As a product developer, I need to implement: Script cross-browser end-to-end user journeys in Playwright with CI execution.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",To Do,Low,User Story,5,Unassigned
+BUG-041: State Sync Failure on React Native Client during offline mode in Playwright & Postman Test Automation Framework,"Environment: Staging / Production
+
+Issue Description: Local SQLite database fails to reconcile with remote API upon network restoration.
+
+Steps to Reproduce:
+1. Trigger concurrent requests.
+2. Observe server response headers and DB logs.
+
+Expected Result: System gracefully handles concurrency without state corruption.",To Do,Normal,Bug,2,Unassigned
+US-168: Postman API Test Collection & Newman Integration for Playwright & Postman Test Automation Framework,"As a product developer, I need to implement: Create parameterized Postman API collection with pre-request scripts and assertions.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Review,High,User Story,3,Unassigned
+US-169: Audit Logging & Compliance Event Tracker for Playwright & Postman Test Automation Framework,"As a product developer, I need to implement: Capture immutable audit logs for administrative actions and security sensitive state changes.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",Done,Low,User Story,5,Unassigned
+US-170: Localization & Multi-Language Support (i18n) for Playwright & Postman Test Automation Framework,"As a product developer, I need to implement: Implement client and server-side internationalization support for English, Sinhala, and Tamil.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Progress,High,User Story,3,Unassigned
+US-171: Performance Load Testing & Profiling (k6 / Locust) for Playwright & Postman Test Automation Framework,"As a product developer, I need to implement: Simulate peak concurrency load of 10,000 active users and profile memory/CPU usage.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",QA Testing,Low,User Story,5,Unassigned
+BUG-042: Race Condition causing duplicate transactions in Playwright & Postman Test Automation Framework,"Environment: Staging / Production
+
+Issue Description: Double click on submit button sends parallel requests resulting in dual database commits.
+
+Steps to Reproduce:
+1. Trigger concurrent requests.
+2. Observe server response headers and DB logs.
+
+Expected Result: System gracefully handles concurrency without state corruption.",In Progress,Urgent,Bug,2,Unassigned
+US-172: Implement Redis Caching Layer for Playwright & Postman Test Automation Framework API Endpoints,"As a product developer, I need to implement: Architect high-throughput caching strategy using Redis cluster to achieve <50ms P99 latency.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",To Do,High,User Story,5,Unassigned
+US-173: Database Schema Migration & Index Optimization for Playwright & Postman Test Automation Framework,"As a product developer, I need to implement: Design PostgreSQL relational schema with partitioned tables, B-tree/GIN indexes, and foreign key constraints.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Review,Low,User Story,8,Unassigned
+EPIC-MOBILE: React Native Cross-Platform Sync Architecture,"End-to-end design, implementation, testing, and deployment of the React Native Cross-Platform Sync module.",In Progress,High,Epic,,Unassigned
+US-174: Implement Redis Caching Layer for React Native Cross-Platform Sync API Endpoints,"As a product developer, I need to implement: Architect high-throughput caching strategy using Redis cluster to achieve <50ms P99 latency.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",Done,Normal,User Story,5,Unassigned
+US-175: Database Schema Migration & Index Optimization for React Native Cross-Platform Sync,"As a product developer, I need to implement: Design PostgreSQL relational schema with partitioned tables, B-tree/GIN indexes, and foreign key constraints.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Progress,Urgent,User Story,8,Unassigned
+BUG-043: Memory Leak in WebSocket Connection Pool during React Native Cross-Platform Sync sync,"Environment: Staging / Production
+
+Issue Description: Unreleased event listeners lead to steady node.js heap memory escalation under load.
+
+Steps to Reproduce:
+1. Trigger concurrent requests.
+2. Observe server response headers and DB logs.
+
+Expected Result: System gracefully handles concurrency without state corruption.",To Do,High,Bug,2,Unassigned
+US-176: RESTful & GraphQL API Design for React Native Cross-Platform Sync,"As a product developer, I need to implement: Expose secure REST endpoints with OpenAPI 3.0 specification and GraphQL queries for mobile clients.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",QA Testing,Normal,User Story,5,Unassigned
+US-177: Unit & Integration Test Coverage (>85%) for React Native Cross-Platform Sync,"As a product developer, I need to implement: Write Jest / PyTest test cases ensuring critical business logic path coverage exceeds 85%.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",To Do,Urgent,User Story,3,Unassigned
+US-178: Input Validation & Sanitization Framework for React Native Cross-Platform Sync,"As a product developer, I need to implement: Implement middleware sanitization against SQL Injection, XSS, and payload manipulation.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Review,Normal,User Story,3,Unassigned
+US-179: Asynchronous Event Publishing to Apache Kafka for React Native Cross-Platform Sync,"As a product developer, I need to implement: Publish transactional domain events to Kafka topic for distributed microservices processing.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",Done,Urgent,User Story,8,Unassigned
+BUG-044: SQL Query Timeout on large dataset pagination in React Native Cross-Platform Sync,"Environment: Staging / Production
+
+Issue Description: Missing index on soft-deleted rows causes full table scan on 5M+ row table.
+
+Steps to Reproduce:
+1. Trigger concurrent requests.
+2. Observe server response headers and DB logs.
+
+Expected Result: System gracefully handles concurrency without state corruption.",In Progress,High,Bug,2,Unassigned
+US-180: Rate Limiting & DDoS Protection Middleware for React Native Cross-Platform Sync,"As a product developer, I need to implement: Enforce token bucket algorithm via Redis to prevent API scraping and brute force attacks.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Progress,Normal,User Story,5,Unassigned
+US-181: UI/UX Component Development in Next.js / Tailwind for React Native Cross-Platform Sync,"As a product developer, I need to implement: Build accessible, responsive React components matching Figma Design System tokens.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",QA Testing,Urgent,User Story,5,Unassigned
+US-182: Automated End-to-End E2E Test Suite (Playwright) for React Native Cross-Platform Sync,"As a product developer, I need to implement: Script cross-browser end-to-end user journeys in Playwright with CI execution.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",To Do,Normal,User Story,5,Unassigned
+US-183: Postman API Test Collection & Newman Integration for React Native Cross-Platform Sync,"As a product developer, I need to implement: Create parameterized Postman API collection with pre-request scripts and assertions.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Review,Urgent,User Story,3,Unassigned
+BUG-045: XSS Vulnerability in un-sanitized user comment field in React Native Cross-Platform Sync,"Environment: Staging / Production
+
+Issue Description: Script tags executed when rendering rich text user feedback in admin portal.
+
+Steps to Reproduce:
+1. Trigger concurrent requests.
+2. Observe server response headers and DB logs.
+
+Expected Result: System gracefully handles concurrency without state corruption.",To Do,Urgent,Bug,2,Unassigned
+US-184: Audit Logging & Compliance Event Tracker for React Native Cross-Platform Sync,"As a product developer, I need to implement: Capture immutable audit logs for administrative actions and security sensitive state changes.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",Done,Normal,User Story,5,Unassigned
+US-185: Localization & Multi-Language Support (i18n) for React Native Cross-Platform Sync,"As a product developer, I need to implement: Implement client and server-side internationalization support for English, Sinhala, and Tamil.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Progress,Urgent,User Story,3,Unassigned
+EPIC-VENDOR: Multi-Vendor Marketplace & Settlement Architecture,"End-to-end design, implementation, testing, and deployment of the Multi-Vendor Marketplace & Settlement module.",In Progress,High,Epic,,Unassigned
+US-186: Implement Redis Caching Layer for Multi-Vendor Marketplace & Settlement API Endpoints,"As a product developer, I need to implement: Architect high-throughput caching strategy using Redis cluster to achieve <50ms P99 latency.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Progress,Normal,User Story,5,Unassigned
+US-187: Database Schema Migration & Index Optimization for Multi-Vendor Marketplace & Settlement,"As a product developer, I need to implement: Design PostgreSQL relational schema with partitioned tables, B-tree/GIN indexes, and foreign key constraints.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",QA Testing,Urgent,User Story,8,Unassigned
+BUG-046: Token Expiration Mismatch between Auth Service and Gateway in Multi-Vendor Marketplace & Settlement,"Environment: Staging / Production
+
+Issue Description: Gateway accepts expired JWT tokens due to clock skew between server instances.
+
+Steps to Reproduce:
+1. Trigger concurrent requests.
+2. Observe server response headers and DB logs.
+
+Expected Result: System gracefully handles concurrency without state corruption.",In Progress,High,Bug,2,Unassigned
+US-188: RESTful & GraphQL API Design for Multi-Vendor Marketplace & Settlement,"As a product developer, I need to implement: Expose secure REST endpoints with OpenAPI 3.0 specification and GraphQL queries for mobile clients.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",To Do,Normal,User Story,5,Unassigned
+US-189: Unit & Integration Test Coverage (>85%) for Multi-Vendor Marketplace & Settlement,"As a product developer, I need to implement: Write Jest / PyTest test cases ensuring critical business logic path coverage exceeds 85%.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Review,Urgent,User Story,3,Unassigned
+US-190: Input Validation & Sanitization Framework for Multi-Vendor Marketplace & Settlement,"As a product developer, I need to implement: Implement middleware sanitization against SQL Injection, XSS, and payload manipulation.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",Done,Normal,User Story,3,Unassigned
+US-191: Asynchronous Event Publishing to Apache Kafka for Multi-Vendor Marketplace & Settlement,"As a product developer, I need to implement: Publish transactional domain events to Kafka topic for distributed microservices processing.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Progress,Urgent,User Story,8,Unassigned
+BUG-047: State Sync Failure on React Native Client during offline mode in Multi-Vendor Marketplace & Settlement,"Environment: Staging / Production
+
+Issue Description: Local SQLite database fails to reconcile with remote API upon network restoration.
+
+Steps to Reproduce:
+1. Trigger concurrent requests.
+2. Observe server response headers and DB logs.
+
+Expected Result: System gracefully handles concurrency without state corruption.",To Do,Normal,Bug,2,Unassigned
+US-192: Rate Limiting & DDoS Protection Middleware for Multi-Vendor Marketplace & Settlement,"As a product developer, I need to implement: Enforce token bucket algorithm via Redis to prevent API scraping and brute force attacks.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",QA Testing,Normal,User Story,5,Unassigned
+US-193: UI/UX Component Development in Next.js / Tailwind for Multi-Vendor Marketplace & Settlement,"As a product developer, I need to implement: Build accessible, responsive React components matching Figma Design System tokens.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",To Do,Urgent,User Story,5,Unassigned
+US-194: Automated End-to-End E2E Test Suite (Playwright) for Multi-Vendor Marketplace & Settlement,"As a product developer, I need to implement: Script cross-browser end-to-end user journeys in Playwright with CI execution.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Review,Normal,User Story,5,Unassigned
+US-195: Postman API Test Collection & Newman Integration for Multi-Vendor Marketplace & Settlement,"As a product developer, I need to implement: Create parameterized Postman API collection with pre-request scripts and assertions.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",Done,Urgent,User Story,3,Unassigned
+BUG-048: Race Condition causing duplicate transactions in Multi-Vendor Marketplace & Settlement,"Environment: Staging / Production
+
+Issue Description: Double click on submit button sends parallel requests resulting in dual database commits.
+
+Steps to Reproduce:
+1. Trigger concurrent requests.
+2. Observe server response headers and DB logs.
+
+Expected Result: System gracefully handles concurrency without state corruption.",In Progress,Urgent,Bug,2,Unassigned
+US-196: Audit Logging & Compliance Event Tracker for Multi-Vendor Marketplace & Settlement,"As a product developer, I need to implement: Capture immutable audit logs for administrative actions and security sensitive state changes.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",In Progress,Normal,User Story,5,Unassigned
+US-197: Localization & Multi-Language Support (i18n) for Multi-Vendor Marketplace & Settlement,"As a product developer, I need to implement: Implement client and server-side internationalization support for English, Sinhala, and Tamil.
+
+Acceptance Criteria:
+1. Fully compliant with enterprise architectural standards.
+2. Fully tested with >85% unit test coverage.
+3. Approved by QA & Security Review.",QA Testing,Urgent,User Story,3,Unassigned

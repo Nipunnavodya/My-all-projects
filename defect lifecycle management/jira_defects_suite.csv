@@ -1,0 +1,34 @@
+Issue Type,Summary,Description,Priority,Status,Environment,Severity
+Bug,Checkout button unresponsive when cart total exceeds $500,"Steps to Reproduce:
+1. Add items totaling over $500 to the cart.
+2. Navigate to /checkout.
+3. Click 'Proceed to Checkout'.
+
+Expected Result: User redirected to payment gateway.
+Actual Result: Button becomes disabled, console throws TypeError: orderLimitExceeded.",High,To Do,Chrome v120 / Windows 11,Critical
+Bug,SQL Error 500 thrown on product search with single quote,"Steps to Reproduce:
+1. Open search bar on homepage.
+2. Enter the input: Men's Watch.
+3. Press Enter.
+
+Expected Result: Return matching products or empty results.
+Actual Result: HTTP 500 Internal Server Error displayed.",Highest,In Progress,Firefox v121 / Linux,Blocker
+Bug,User profile image upload fails for standard JPEG format,"Steps to Reproduce:
+1. Go to Profile Settings.
+2. Click 'Upload Profile Picture'.
+3. Select valid 2MB image.jpeg.
+
+Expected Result: Image uploaded and avatar updated.
+Actual Result: UI shows 'Invalid file format' error toast.",Medium,Resolved,Safari / macOS Sonoma,Major
+Bug,Discount coupon SAVE20 applies twice on page refresh,"Steps to Reproduce:
+1. Apply coupon code SAVE20 in cart.
+2. Refresh browser window using F5.
+
+Expected Result: Discount remains 20%.
+Actual Result: Discount stacks to 40% on total order amount.",High,In Progress,Chrome v120 / macOS,Major
+Bug,Typo in Password Reset email template,"Steps to Reproduce:
+1. Request password reset on login page.
+2. Open received confirmation email.
+
+Expected Result: 'Click here to reset your password'.
+Actual Result: Reads 'Click hear to reset your password'.",Low,Closed,Any Email Client,Trivial

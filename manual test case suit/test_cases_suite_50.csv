@@ -1,0 +1,51 @@
+Test Case ID,Module,Test Case Title,Test Type,Pre-conditions,Test Steps,Test Data,Expected Result,Priority
+TC_AUTH_01,Authentication,Login with valid email and password,Positive,User account exists,1. Enter valid email 2. Enter valid password 3. Click Login,user@test.com / Pass@123,Redirect to dashboard with success session,High
+TC_AUTH_02,Authentication,Login with invalid password,Negative,User account exists,1. Enter valid email 2. Enter incorrect password 3. Click Login,user@test.com / Wrong123,Show error message 'Invalid credentials',High
+TC_AUTH_03,Authentication,Login with empty email field,Negative,Login page loaded,1. Leave email empty 2. Enter password 3. Click Login,Pass@123,Validation error 'Email is required',Medium
+TC_AUTH_04,Authentication,Login with empty password field,Negative,Login page loaded,1. Enter email 2. Leave password empty 3. Click Login,user@test.com,Validation error 'Password is required',Medium
+TC_AUTH_05,Authentication,Login with unregistered email,Negative,Email does not exist,1. Enter unregistered email 2. Enter password 3. Click Login,ghost@domain.com / Pass@123,Error 'Account does not exist',Medium
+TC_AUTH_06,Authentication,Login with invalid email format (no @),Negative,Login page loaded,1. Enter invalid email 2. Enter password 3. Click Login,invalidmail.com / Pass@123,Validation message 'Enter valid email address',Low
+TC_AUTH_07,Authentication,SQL Injection in login input,Negative,Login page loaded,1. Enter SQL injection payload in email 2. Click Login,' OR '1'='1 / 1234,Input sanitized and login blocked,High
+TC_AUTH_08,Authentication,Password field masking check,Positive,Login page loaded,1. Type characters in password input,,Input characters masked with dots/asterisks,Medium
+TC_AUTH_09,Authentication,Password toggle visibility,Positive,Password entered,1. Click eye icon on password field,Pass@123,Password text reveals and hides on toggle,Low
+TC_AUTH_10,Authentication,Account lockout after 5 consecutive failed logins,Negative,Valid account exists,1. Enter wrong password 5 times in a row,user@test.com / WrongPw,Account temporarily locked for 15 mins,High
+TC_AUTH_11,Authentication,Session timeout on inactivity,Positive,User logged in,1. Keep browser idle for 30 minutes,,Session expires and redirects to login,Medium
+TC_AUTH_12,Authentication,Password reset link dispatch,Positive,Valid account exists,1. Click Forgot Password 2. Enter email 3. Submit,user@test.com,Password reset link received via email,High
+TC_AUTH_13,Authentication,Password reset with unregistered email,Negative,Login page loaded,1. Click Forgot Password 2. Enter fake email 3. Submit,fake@test.com,Generic message shown for security,Medium
+TC_SRCH_14,Search & Filter,Search existing product by exact name,Positive,Products in database,1. Type product name in search bar 2. Press Enter,Gaming Mouse,List of matching products displayed,High
+TC_SRCH_15,Search & Filter,Search with partial keyword,Positive,Products in database,1. Type substring in search bar 2. Press Enter,Headph,Products matching keyword returned,Medium
+TC_SRCH_16,Search & Filter,Search non-existent product,Negative,Products in database,1. Type non-existing gibberish 2. Press Enter,zxqvbnm1234,Message displayed 'No products found',Medium
+TC_SRCH_17,Search & Filter,Search with special characters,Negative,Products in database,1. Enter special characters in search box 2. Search,<script>alert(1)</script>,Special characters stripped/escaped cleanly,High
+TC_SRCH_18,Search & Filter,Search with leading and trailing whitespaces,Positive,Products in database,1. Enter product name with extra spaces 2. Search,   Keyboard   ,Spaces trimmed and valid product shown,Low
+TC_SRCH_19,Search & Filter,Filter products by price range (Min to Max),Positive,Category page loaded,1. Set Min price 50 2. Set Max price 100 3. Apply,Min=50 Max=100,Only products in $50-$100 range shown,High
+TC_SRCH_20,Search & Filter,Filter price range with Min greater than Max,Negative,Category page loaded,1. Set Min 200 2. Set Max 100 3. Apply,Min=200 Max=100,Validation error 'Min cannot exceed Max',Medium
+TC_SRCH_21,Search & Filter,Filter products by multiple categories,Positive,Category page loaded,1. Select Electronics 2. Select Apparel 3. Apply,Electronics / Apparel,Products from both categories displayed,Medium
+TC_SRCH_22,Search & Filter,Sort products by Price: Low to High,Positive,Product list loaded,1. Select sorting dropdown 'Price Low to High',,Products sorted in ascending price order,Medium
+TC_SRCH_23,Search & Filter,Clear all active filters,Positive,Filters applied,1. Click 'Clear All Filters' button,,Product list resets to default view,Low
+TC_CART_24,Cart & Checkout,Add single item to cart,Positive,Product in stock,1. Open product page 2. Click 'Add to Cart',Quantity=1,Cart count badge increments to 1,High
+TC_CART_25,Cart & Checkout,Add out-of-stock item to cart,Negative,Product stock is 0,1. Open out-of-stock product page 2. Check Add to Cart button,,Button is disabled or shows Out of Stock,High
+TC_CART_26,Cart & Checkout,Add item exceeding inventory limit,Negative,Product stock is 5,1. Enter quantity 10 2. Click Add to Cart,Quantity=10,Error 'Cannot add more than 5 items',High
+TC_CART_27,Cart & Checkout,Update item quantity in cart view,Positive,1 item in cart,1. Open cart 2. Change quantity from 1 to 3,Quantity=3,Total subtotal updates correctly,Medium
+TC_CART_28,Cart & Checkout,Reduce item quantity to zero,Positive,1 item in cart,1. Open cart 2. Decrement quantity to 0,,Confirmation dialog to remove item from cart,Medium
+TC_CART_29,Cart & Checkout,Remove product completely from cart,Positive,Item in cart,1. Open cart 2. Click trash/remove icon,,Item removed and empty cart state shown,High
+TC_CART_30,Cart & Checkout,Cart data persistence after page refresh,Positive,2 items in cart,1. Refresh browser window (F5),,Cart items and total remain unchanged,Medium
+TC_CART_31,Cart & Checkout,Proceed to checkout with empty cart,Negative,Cart is empty,1. Open empty cart 2. Click 'Checkout',,Checkout blocked with 'Your cart is empty',Medium
+TC_CART_32,Cart & Checkout,Apply valid discount coupon code,Positive,Cart total > $50,1. Enter valid coupon 2. Click Apply,SAVE20,20% discount deducted from total,High
+TC_CART_33,Cart & Checkout,Apply expired discount coupon,Negative,Cart has items,1. Enter expired coupon 2. Click Apply,EXPIRED2025,Error message 'Coupon code is expired',Medium
+TC_CART_34,Cart & Checkout,Apply coupon below minimum order amount,Negative,Cart total $20,1. Apply coupon requiring $100 min,MIN100,Error 'Minimum order amount not met',Medium
+TC_CART_35,Cart & Checkout,Checkout as Guest with valid details,Positive,Cart has items,1. Select Guest Checkout 2. Fill shipping details 3. Submit,John / Colombo,Order moves to payment screen,High
+TC_PAY_36,Payment Gateway,Payment with valid credit card,Positive,Order in payment step,1. Enter valid 16-digit card 2. Enter valid CVV & Expiry 3. Pay,Visa Valid / CVV 123,Payment successful, order confirmed,High
+TC_PAY_37,Payment Gateway,Payment with expired credit card,Negative,Order in payment step,1. Enter expired date 2. Click Pay,Expiry 01/24,Error 'Card has expired',High
+TC_PAY_38,Payment Gateway,Payment with invalid CVV length,Negative,Order in payment step,1. Enter 2-digit CVV 2. Click Pay,CVV 12,Validation error 'CVV must be 3 digits',Medium
+TC_PAY_39,Payment Gateway,Payment with invalid 15-digit card number,Negative,Order in payment step,1. Enter 15 digits instead of 16 2. Click Pay,411111111111111,Error 'Invalid card number',High
+TC_PAY_40,Payment Gateway,Payment gateway network timeout,Negative,Order in payment step,1. Trigger payment 2. Simulate dropped connection,,Friendly error and option to retry,Medium
+TC_PAY_41,Payment Gateway,Payment with Cash on Delivery (COD),Positive,Order in payment step,1. Select COD option 2. Click Confirm Order,,Order confirmed with COD tag,High
+TC_PAY_42,Payment Gateway,Double submission prevention (Double Click Pay),Negative,Order in payment step,1. Double click Pay button rapidly,,Button disables immediately, 1 charge created,High
+TC_PAY_43,Payment Gateway,Order invoice PDF generation after payment,Positive,Payment completed,1. Click 'Download Invoice' on confirmation page,,PDF invoice downloads with correct totals,Medium
+TC_PROF_44,User Profile,Update user profile with valid phone and address,Positive,User logged in,1. Open profile 2. Edit address 3. Save,No 12 Galle Rd,Profile updated confirmation displayed,Medium
+TC_PROF_45,User Profile,Update profile with invalid phone number format,Negative,User logged in,1. Enter letters in phone field 2. Save,Phone=ABCXYZ,Validation error 'Invalid phone number',Low
+TC_PROF_46,User Profile,Change password matching current password,Negative,User logged in,1. Enter new password identical to old password 2. Submit,Old=Pass@123 New=Pass@123,Error 'New password cannot be same as old',Medium
+TC_PROF_47,User Profile,Change password with mismatched confirmation,Negative,User logged in,1. Enter new password 2. Enter mismatch confirm password 3. Submit,New=Pass@123 Confirm=Pass@999,Error 'Passwords do not match',High
+TC_PROF_48,User Profile,Upload profile avatar with valid PNG,Positive,User logged in,1. Upload 500KB PNG image 2. Save,avatar.png,Avatar uploaded and displayed,Low
+TC_PROF_49,User Profile,Upload profile avatar exceeding file size limit (10MB),Negative,User logged in,1. Upload 15MB file 2. Save,large_file.jpg,Error 'File size cannot exceed 5MB',Low
+TC_PROF_50,User Profile,Account deletion / Deactivate confirmation,Positive,User logged in,1. Click 'Delete Account' 2. Enter password 3. Confirm,,Account marked deleted and session cleared,High
